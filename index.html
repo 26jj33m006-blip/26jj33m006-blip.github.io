@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>별빛 추모식 — 작은 기억을 보내는 시간</title>
+<style>
+:root{color-scheme:dark;--bg:#101827;--panel:#1b2940;--gold:#f4d58d;--muted:#a9b6ca;--mint:#b9e2d0}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;color:#f6f3ed;background:radial-gradient(ellipse at 50% 0%,#34445f 0,#18243a 42%,#0c1422 100%);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;background-image:radial-gradient(2px 2px at 12% 20%,#fff 45%,transparent 55%),radial-gradient(1px 1px at 70% 15%,#fff 45%,transparent 55%),radial-gradient(2px 2px at 85% 65%,#f4d58d 45%,transparent 55%),radial-gradient(1px 1px at 30% 75%,#fff 45%,transparent 55%);background-size:280px 240px}
+main{width:min(920px,92vw);margin:0 auto;padding:42px 0 64px;position:relative}.eyebrow{text-align:center;color:var(--gold);letter-spacing:.22em;font-size:.76rem}.hero{text-align:center;margin:12px auto 28px}.hero h1{font-size:clamp(2rem,6vw,3.6rem);margin:8px 0;font-weight:650;letter-spacing:-.05em}.hero p{color:var(--muted);line-height:1.8;margin:0 auto;max-width:580px}
+.panel{background:linear-gradient(145deg,rgba(35,51,76,.92),rgba(21,32,50,.94));border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:clamp(18px,4vw,34px);box-shadow:0 24px 70px #0005}
+.progress{display:flex;gap:8px;margin-bottom:25px}.step{height:5px;flex:1;border-radius:9px;background:#ffffff18}.step.active{background:var(--gold)}
+.scene{min-height:250px;border-radius:20px;background:linear-gradient(180deg,#273b58,#1b2b43);display:grid;place-items:center;text-align:center;padding:25px;position:relative;overflow:hidden}.moon{font-size:4rem;filter:drop-shadow(0 0 22px #f4d58d88)}.scene h2{margin:10px 0 4px;font-size:1.35rem}.scene p{color:#c2ccda;margin:0;line-height:1.7}
+.section-title{font-size:1.15rem;margin:26px 0 12px}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.choice{border:1px solid #ffffff20;background:#ffffff08;color:#f6f3ed;border-radius:16px;padding:15px 10px;cursor:pointer;transition:.2s;font:inherit}.choice:hover,.choice.selected{border-color:var(--gold);background:#f4d58d16;transform:translateY(-2px)}.choice .emoji{font-size:1.9rem;display:block;margin-bottom:7px}.choice small{display:block;color:var(--muted);margin-top:4px}
+textarea,input{width:100%;border:1px solid #ffffff25;background:#101b2c;color:#fff;border-radius:13px;padding:13px 14px;font:inherit;outline:none}textarea:focus,input:focus{border-color:var(--gold)}textarea{resize:vertical;min-height:82px}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}.btn{border:0;border-radius:999px;padding:12px 22px;font:inherit;font-weight:650;cursor:pointer;background:var(--gold);color:#263044}.btn.secondary{background:#ffffff12;color:#f6f3ed;border:1px solid #ffffff25}.btn:disabled{opacity:.35;cursor:not-allowed}
+.note{font-size:.88rem;color:var(--muted);line-height:1.7;text-align:center;margin:18px 0 0}.hidden{display:none!important}.result{padding:24px;text-align:center}.result .lantern{font-size:5rem;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 0 25px #f4d58d88)}.result h2{font-size:1.8rem;color:var(--gold)}.result p{line-height:1.9;color:#d2d9e4;white-space:pre-line}
+@keyframes float{50%{transform:translateY(-12px)}}@media(max-width:600px){main{padding-top:28px}.choices{grid-template-columns:1fr}.choice{display:flex;align-items:center;text-align:left;gap:12px}.choice .emoji{margin:0}.scene{min-height:210px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">A QUIET MOMENT UNDER THE STARS</div>
+  <header class="hero"><h1>별빛 추모식</h1><p>소중한 기억을 천천히 돌아보고, 따뜻한 마음으로 인사를 건네는 작은 추모 게임입니다.</p></header>
+  <section class="panel" id="game">
+    <div class="progress" aria-label="진행 단계"><span class="step active"></span><span class="step"></span><span class="step"></span></div>
+    <div class="scene" id="scene"><div><div class="moon">🌙</div><h2>고요한 정원에 오신 걸 환영해요</h2><p>꽃과 등불을 고르고, 기억하고 싶은 말을 남겨보세요.</p></div></div>
+    <div id="stage1">
+      <h3 class="section-title">1. 추모의 꽃을 골라주세요</h3>
+      <div class="choices" id="flowers">
+        <button class="choice" data-value="🌼 국화"><span class="emoji">🌼</span>국화<small>진심 어린 추모</small></button>
+        <button class="choice" data-value="🌷 튤립"><span class="emoji">🌷</span>튤립<small>다정한 기억</small></button>
+        <button class="choice" data-value="🤍 백합"><span class="emoji">🤍</span>백합<small>평온한 작별</small></button>
+      </div>
+      <div class="actions"><button class="btn" id="to2" disabled>다음으로</button></div>
+    </div>
+    <div id="stage2" class="hidden">
+      <h3 class="section-title">2. 마음을 담을 등불을 골라주세요</h3>
+      <div class="choices" id="lights">
+        <button class="choice" data-value="🕯️ 작은 촛불"><span class="emoji">🕯️</span>작은 촛불<small>조용한 위로</small></button>
+        <button class="choice" data-value="🏮 따뜻한 등불"><span class="emoji">🏮</span>따뜻한 등불<small>오래도록 빛나는 기억</small></button>
+        <button class="choice" data-value="✨ 별빛"><span class="emoji">✨</span>별빛<small>하늘에 전하는 인사</small></button>
+      </div>
+      <div class="actions"><button class="btn secondary" id="back1">이전</button><button class="btn" id="to3" disabled>다음으로</button></div>
+    </div>
+    <div id="stage3" class="hidden">
+      <h3 class="section-title">3. 전하고 싶은 말을 남겨주세요</h3>
+      <p class="note" style="text-align:left;margin:0 0 10px">이름이나 짧은 추모 문구를 적어도 좋아요. 비워두어도 진행할 수 있어요.</p>
+      <input id="memoryName" maxlength="24" placeholder="기억하고 싶은 이름 (선택)">
+      <textarea id="message" maxlength="180" placeholder="고마웠어요. 함께한 시간을 소중히 기억할게요."></textarea>
+      <div class="actions"><button class="btn secondary" id="back2">이전</button><button class="btn" id="finish">등불 보내기</button></div>
+    </div>
+    <div id="ending" class="hidden result">
+      <div class="lantern" id="endEmoji">🏮</div><h2>별빛 아래, 마음을 전했어요</h2>
+      <p id="endText"></p>
+      <button class="btn" id="restart">처음부터 다시 하기</button>
+    </div>
+  </section>
+  <p class="note">이 게임은 실제 장례 절차를 재현하지 않는 상징적인 추모 체험입니다.<br>누군가를 기억하는 방식에는 정답이 없어요.</p>
+</main>
+<script>
+const state={flower:"",light:""};
+const stages=["stage1","stage2","stage3"];
+const bars=[...document.querySelectorAll(".step")];
+function selectGroup(id,key,next){document.querySelectorAll("#"+id+" .choice").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("#"+id+" .choice").forEach(x=>x.classList.remove("selected"));btn.classList.add("selected");state[key]=btn.dataset.value;next.disabled=false;}));}
+selectGroup("flowers","flower",document.getElementById("to2"));
+selectGroup("lights","light",document.getElementById("to3"));
+function show(n){stages.forEach((id,i)=>document.getElementById(id).classList.toggle("hidden",i!==n));document.getElementById("ending").classList.add("hidden");bars.forEach((b,i)=>b.classList.toggle("active",i<=n));}
+document.getElementById("to2").onclick=()=>{show(1);document.getElementById("scene").innerHTML="<div><div class='moon'>🌌</div><h2>마음에 드는 등불을 골라보세요</h2><p>작은 빛 하나에도 따뜻한 마음을 담을 수 있어요.</p></div>";};
+document.getElementById("back1").onclick=()=>show(0);
+document.getElementById("to3").onclick=()=>{show(2);document.getElementById("scene").innerHTML="<div><div class='moon'>💫</div><h2>마지막 인사를 준비해요</h2><p>천천히 생각하고, 전하고 싶은 말을 적어보세요.</p></div>";};
+document.getElementById("back2").onclick=()=>show(1);
+document.getElementById("finish").onclick=()=>{
+ const name=document.getElementById("memoryName").value.trim();
+ const msg=document.getElementById("message").value.trim()||"함께한 시간을 소중히 기억할게요.";
+ document.getElementById("game").querySelectorAll("#stage1,#stage2,#stage3").forEach(x=>x.classList.add("hidden"));
+ document.getElementById("game").querySelector(".progress").classList.add("hidden");
+ document.getElementById("ending").classList.remove("hidden");
+ document.getElementById("endEmoji").textContent=state.light.split(" ")[0]||"🏮";
+ document.getElementById("endText").textContent=(name?name+"에게\n":"")+state.flower+"을(를) 놓고 "+state.light+"을(를) 골랐어요.\n\n“"+msg+"”\n\n당신의 따뜻한 기억이 별빛처럼 오래 머물기를 바랍니다.";
+ document.getElementById("scene").classList.add("hidden");
+};
+document.getElementById("restart").onclick=()=>location.reload();
+</script>
+</body>
+</html>

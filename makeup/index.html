@@ -14,26 +14,26 @@
 </defs>
 <ellipse cx="180" cy="488" rx="112" ry="13" fill="#e8cbd7" opacity=".55"/>
 <!-- back hair -->
-<path d="M83 195Q55 55 180 35Q306 52 279 205L274 330Q260 382 226 393L130 393Q93 365 86 315Z" fill="url(#hair)"/>
+<path id="hair-back" d="M83 195Q55 55 180 35Q306 52 279 205L274 330Q260 382 226 393L130 393Q93 365 86 315Z" fill="url(#hair)"/>
 <!-- shoulders and clothing, clearly separated from neck -->
-<path d="M119 342Q91 350 69 383Q48 418 42 490L318 490Q311 417 290 383Q269 350 241 342L215 333L145 333Z" fill="url(#cloth)" stroke="#a85f83" stroke-width="2"/>
-<path d="M139 335Q180 369 221 335L246 354Q222 392 180 394Q138 392 114 354Z" fill="#fff0f5" stroke="#d99ab5" stroke-width="2"/>
-<path d="M146 353Q180 379 214 353L201 490H159Z" fill="#fff8fa" opacity=".88"/>
-<path d="M180 394V485" stroke="#e4a6be" stroke-width="2" opacity=".8"/>
+<path id="outfit-base" d="M119 342Q91 350 69 383Q48 418 42 490L318 490Q311 417 290 383Q269 350 241 342L215 333L145 333Z" fill="url(#cloth)" stroke="#a85f83" stroke-width="2"/>
+<path id="neckline" d="M139 335Q180 369 221 335L246 354Q222 392 180 394Q138 392 114 354Z" fill="#fff0f5" stroke="#d99ab5" stroke-width="2"/>
+<path id="frontpanel" d="M146 353Q180 379 214 353L201 490H159Z" fill="#fff8fa" opacity=".88"/>
+<path id="outfit-seam" d="M180 394V485" stroke="#e4a6be" stroke-width="2" opacity=".8"/><g id="outfit-details"></g>
 <circle cx="180" cy="414" r="3" fill="#c47b9a"/><circle cx="180" cy="438" r="3" fill="#c47b9a"/><circle cx="180" cy="462" r="3" fill="#c47b9a"/>
 <!-- neck -->
-<path d="M148 286L148 350Q180 375 212 350L212 286Z" fill="url(#skin)" stroke="#d99f8d" stroke-width="1.2"/>
+<path id="neck-skin" d="M148 286L148 350Q180 375 212 350L212 286Z" fill="url(#skin)" stroke="#d99f8d" stroke-width="1.2"/>
 <path d="M149 322Q180 345 211 322" fill="none" stroke="#d69b8a" stroke-width="2" opacity=".45"/>
 <!-- ears -->
-<ellipse cx="99" cy="224" rx="15" ry="24" fill="url(#skin)" stroke="#dfaa98"/><ellipse cx="261" cy="224" rx="15" ry="24" fill="url(#skin)" stroke="#dfaa98"/>
+<g id="ears-skin"><ellipse cx="99" cy="224" rx="15" ry="24" fill="url(#skin)" stroke="#dfaa98"/><ellipse cx="261" cy="224" rx="15" ry="24" fill="url(#skin)" stroke="#dfaa98"/></g>
 <!-- face: balanced oval -->
-<path d="M99 169Q101 99 180 91Q259 99 261 169L252 251Q242 310 180 321Q118 310 108 251Z" fill="url(#skin)" stroke="#e7b5a2" stroke-width="1"/>
+<path id="face-skin" d="M99 169Q101 99 180 91Q259 99 261 169L252 251Q242 310 180 321Q118 310 108 251Z" fill="url(#skin)" stroke="#e7b5a2" stroke-width="1"/>
 <!-- face highlights -->
 <ellipse cx="145" cy="166" rx="26" ry="47" fill="url(#shine)" opacity=".38"/>
 <!-- fringe and hair framing -->
-<path d="M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q250 145 230 130Q190 151 148 130Q120 123 103 160Z" fill="url(#hair)"/>
-<path d="M103 150Q130 116 153 122Q180 132 201 126Q229 117 250 143Q219 139 197 145Q154 157 121 143Z" fill="#805a70" opacity=".55"/>
-<path d="M95 164Q75 225 101 287Q109 305 119 311L112 205Z M265 164Q285 225 259 287Q251 305 241 311L248 205Z" fill="#493449"/>
+<path id="hair-front" d="M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q250 145 230 130Q190 151 148 130Q120 123 103 160Z" fill="url(#hair)"/>
+<path id="hair-shine" d="M103 150Q130 116 153 122Q180 132 201 126Q229 117 250 143Q219 139 197 145Q154 157 121 143Z" fill="#805a70" opacity=".55"/>
+<path id="hair-sides" d="M95 164Q75 225 101 287Q109 305 119 311L112 205Z M265 164Q285 225 259 287Q251 305 241 311L248 205Z" fill="url(#hair)"/>
 <!-- brows -->
 <g id="brows"><path d="M119 190Q139 176 158 190M202 190Q221 176 241 190" fill="none" stroke="#694858" stroke-width="5" stroke-linecap="round"/></g>
 <!-- shadow, liner, eyes -->
@@ -52,11 +52,11 @@
 <div class="mood" id="look-name">새로운 스타일을 골라봐요</div><div class="toolbar"><button class="action" id="random">🎲 랜덤 룩</button><button class="action" id="reset">↺ 처음으로</button><button class="action primary" id="finish">완성했어요! ✨</button></div></section>
 <section class="panel editor"><h2>뷰티 & 스타일 아이템</h2><p class="sub">카테고리를 바꾸고 다양한 아이템을 조합해 보세요.</p>
 <div class="tabs" role="tablist" aria-label="꾸미기 종류">
-<button class="tab" role="tab" aria-selected="true" data-tab="lip">💄 립</button><button class="tab" role="tab" aria-selected="false" data-tab="blush">🌸 블러셔</button><button class="tab" role="tab" aria-selected="false" data-tab="eye">🎨 섀도</button><button class="tab" role="tab" aria-selected="false" data-tab="liner">🖊️ 아이라인</button><button class="tab" role="tab" aria-selected="false" data-tab="lashes">✨ 속눈썹</button><button class="tab" role="tab" aria-selected="false" data-tab="brows">✍️ 눈썹</button><button class="tab" role="tab" aria-selected="false" data-tab="lens">👁️ 렌즈</button><button class="tab" role="tab" aria-selected="false" data-tab="hair">🎀 헤어</button><button class="tab" role="tab" aria-selected="false" data-tab="highlight">💫 하이라이터</button><button class="tab" role="tab" aria-selected="false" data-tab="accessory">💎 액세서리</button><button class="tab" role="tab" aria-selected="false" data-tab="cloth">👗 의상</button><button class="tab" role="tab" aria-selected="false" data-tab="necklace">📿 목걸이</button>
+<button class="tab" role="tab" aria-selected="true" data-tab="skin">🌷 피부</button><button class="tab" role="tab" aria-selected="false" data-tab="lip">💄 립</button><button class="tab" role="tab" aria-selected="false" data-tab="blush">🌸 블러셔</button><button class="tab" role="tab" aria-selected="false" data-tab="eye">🎨 섀도</button><button class="tab" role="tab" aria-selected="false" data-tab="liner">🖊️ 아이라인</button><button class="tab" role="tab" aria-selected="false" data-tab="lashes">✨ 속눈썹</button><button class="tab" role="tab" aria-selected="false" data-tab="brows">✍️ 눈썹</button><button class="tab" role="tab" aria-selected="false" data-tab="lens">👁️ 렌즈</button><button class="tab" role="tab" aria-selected="false" data-tab="hair">🎀 헤어 컬러</button><button class="tab" role="tab" aria-selected="false" data-tab="hairstyle">💇 헤어 디자인</button><button class="tab" role="tab" aria-selected="false" data-tab="highlight">💫 하이라이터</button><button class="tab" role="tab" aria-selected="false" data-tab="accessory">💎 액세서리</button><button class="tab" role="tab" aria-selected="false" data-tab="cloth">👗 의상 디자인</button><button class="tab" role="tab" aria-selected="false" data-tab="necklace">📿 목걸이</button>
 </div><div id="options"></div><div class="hint" id="hint" aria-live="polite">마음에 드는 아이템을 선택해 봐! 정답은 없으니 네 취향대로 완성하면 돼 💗</div></section></main><footer>MAKE YOUR OWN SPARKLE · 나만의 스타일을 즐겨봐요</footer>
 <script>
 const palettes={
-lip:[['체리 핑크','#d85d83'],['로즈','#b94e70'],['코랄','#ed826e'],['플럼','#98516f'],['피치','#ef9b91'],['베리','#bd4770'],['누드','#c9857e'],['라일락','#bd8eae'],['레드','#c94359'],['모브','#aa718e'],['글로스','#f2a6b5'],['브릭','#a94e55']],
+skin:[["아이보리 베이지","#f7dfc9"],["웜 베이지","#edc6a8"],["허니 베이지","#d9a77f"],["골든 브라운","#bd8964"],["코코아 브라운","#98694f"],["딥 브라운","#704936"],["로지 베이지","#e7b9ad"],["쿨 베이지","#e5c9bd"]],\nlip:[['체리 핑크','#d85d83'],['로즈','#b94e70'],['코랄','#ed826e'],['플럼','#98516f'],['피치','#ef9b91'],['베리','#bd4770'],['누드','#c9857e'],['라일락','#bd8eae'],['레드','#c94359'],['모브','#aa718e'],['글로스','#f2a6b5'],['브릭','#a94e55']],
 blush:[['베이비 핑크','#f28fa8'],['살구','#f4a27e'],['로즈','#df7891'],['라벤더','#c39acb'],['피치','#f5b49c'],['코랄','#ed7e79'],['모브','#bd849e'],['소프트','#e9a9b3'],['플럼 핑크','#c76f96'],['누드 피치','#d99a83']],
 eye:[['샴페인','#e9c88d'],['핑크 펄','#e9a5c0'],['라벤더','#b995ca'],['브론즈','#ad765e'],['민트','#9bc9b9'],['로즈 골드','#d89a91'],['스카이','#9dbbdf'],['초코','#79566a'],['실버','#c5c9d6'],['코랄','#e99a87'],['버건디','#9e596f'],['골드 글리터','#e3b95e']],
 liner:[['소프트 브라운','#76515a'],['딥 블랙','#302632'],['플럼','#80506e'],['네이비','#465b82'],['그린','#567b70'],['그레이','#777985']],
@@ -64,22 +64,75 @@ lashes:[['내추럴','#674b55'],['또렷하게','#302632'],['롱 래쉬','#49303
 brows:[['내추럴 브라운','#805c50'],['다크 브라운','#533a3b'],['애쉬 브라운','#8a7776'],['소프트 블랙','#40333a'],['코코아','#9b7161']],
 lens:[['초코 브라운','#8a654c'],['올리브','#74846a'],['그레이','#8d9ba2'],['블루','#6e91b5'],['헤이즐','#aa8055'],['라벤더','#9b82b5'],['내추럴','#765b4c']],
 hair:[['초코 브라운','#68445a'],['블랙','#302632'],['허니 브라운','#b47b50'],['로즈 브라운','#a96b7d'],['라벤더','#9a7aab'],['코퍼','#bc704f'],['애쉬','#88818c'],['핑크','#d88cae'],['밀크티','#c49b83'],['체리','#873f59']],
-highlight:[['샴페인','#fff0c5'],['펄 핑크','#f7c7dc'],['골드','#efd18b'],['실버','#e2e5f1'],['라벤더','#e2c9f4']],
+hairstyle:[['시스루 뱅 롱 웨이브','#765064'],['클래식 미디엄 레이어드','#765064'],['턱선 단발 C컬','#765064'],['허리까지 롱 스트레이트','#765064'],['히메컷 롱 헤어','#765064'],['높은 포니테일','#765064'],['로우 번 업스타일','#765064'],['트윈테일 웨이브','#765064'],['숏 보브컷','#765064'],['사이드 뱅 글램 웨이브','#765064'],['픽시컷','#765064'],['반묶음 리본 헤어','#765064']],\nhighlight:[['샴페인','#fff0c5'],['펄 핑크','#f7c7dc'],['골드','#efd18b'],['실버','#e2e5f1'],['라벤더','#e2c9f4']],
 accessory:[['진주 귀걸이','#f5e6dc'],['골드 링','#d5ad70'],['핑크 리본','#e88fb3'],['별 장식','#f2cf79'],['꽃 장식','#e9a0b6'],['하트 핀','#e8799e']],
-cloth:[['로즈 드레스','#d98baa'],['라벤더 드레스','#a994c9'],['민트 드레스','#8ebcae'],['크림 블라우스','#e8d8c8'],['블루 드레스','#8ca9ce'],['블랙 원피스','#514253'],['피치 드레스','#e9a38f'],['레드 드레스','#b84e64']],
+cloth:[['로맨틱 오프숄더 드레스','#d98baa'],['레이스 스퀘어넥 원피스','#a994c9'],['퍼프 슬리브 블라우스','#8ebcae'],['리본 카라 원피스','#e8d8c8'],['새틴 슬립 드레스','#8ca9ce'],['클래식 재킷 룩','#514253'],['플리츠 스커트 룩','#e9a38f'],['플라워 프린세스 드레스','#b84e64'],['니트 가디건 룩','#c58ca4'],['시크 홀터넥 드레스','#71849c'],['발레코어 튤 드레스','#e9b8cf'],['빈티지 스퀘어넥 드레스','#b98d73'],['리본 퍼프 드레스','#9b8abf'],['미니멀 셔츠 룩','#b6c8bd']],
 necklace:[['골드 목걸이','#d6ad70'],['진주 목걸이','#f1e3d4'],['리본 초커','#d982a5'],['실버 목걸이','#b8c2d4'],['하트 펜던트','#e8a0b5']]
 };
-const labels={lip:'립 컬러',blush:'블러셔 컬러',eye:'아이섀도',liner:'아이라인',lashes:'속눈썹',brows:'눈썹 컬러',lens:'렌즈 컬러',hair:'헤어 컬러',highlight:'하이라이터',accessory:'액세서리',cloth:'의상',necklace:'목걸이'};
+const labels={skin:'피부 톤',lip:'립 컬러',blush:'블러셔 컬러',eye:'아이섀도',liner:'아이라인',lashes:'속눈썹',brows:'눈썹 컬러',lens:'렌즈 컬러',hair:'헤어 컬러',hairstyle:'헤어 디자인 & 기장',highlight:'하이라이터',accessory:'액세서리',cloth:'의상 디자인',necklace:'목걸이'};
 const state=Object.fromEntries(Object.keys(palettes).map(k=>[k,null]));
 const options=document.getElementById('options'),hint=document.getElementById('hint');let tab='lip';
 function render(){document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===tab)));options.innerHTML='<div class="label">'+labels[tab]+' 선택</div><div class="choices">'+palettes[tab].map((v,i)=>'<button class="choice" data-index="'+i+'" aria-pressed="'+(state[tab]===i)+'"><span class="swatch" style="background:'+v[1]+'"></span>'+v[0]+'</button>').join('')+'</div>';options.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{state[tab]=Number(b.dataset.index);apply();render();hint.textContent=palettes[tab][state[tab]][0]+' 아이템을 선택했어요. 다른 스타일과 조합해 보세요! ✨'}))}
 function val(k,def){return state[k]===null?def:palettes[k][state[k]][1]}
 function shade(hex,amt){let n=parseInt(hex.slice(1),16),r=Math.max(0,Math.min(255,(n>>16)+amt)),g=Math.max(0,Math.min(255,((n>>8)&255)+amt)),b=Math.max(0,Math.min(255,(n&255)+amt));return '#'+(1<<24|r<<16|g<<8|b).toString(16).slice(1)}
-function apply(){
- const lip=val('lip','#c86d83'),blush=val('blush','#ef9e9e'),eye=val('eye','#e8b5c9'),hair=val('hair','#68445a'),liner=val('liner','#674b55'),brow=val('brows','#684454'),lens=val('lens','#80604f'),cloth=val('cloth','#d98baa'),hl=val('highlight','#fff0c5');
- document.querySelector('#lips path').setAttribute('fill',lip);
- document.querySelectorAll('#avatar defs linearGradient#hair stop').forEach((s,i)=>s.setAttribute('stop-color',i?shade(hair,-25):hair));
- document.querySelectorAll('#avatar defs linearGradient#cloth stop').forEach((s,i)=>s.setAttribute('stop-color',i?shade(cloth,-24):cloth));
+
+function applyHairDesign(){
+ const n=state.hairstyle===null?0:state.hairstyle;
+ const back=document.getElementById('hair-back'),front=document.getElementById('hair-front'),sides=document.getElementById('hair-sides'),shine=document.getElementById('hair-shine');
+ const designs=[
+ ["M83 195Q55 55 180 35Q306 52 279 205L274 330Q260 382 226 393L130 393Q93 365 86 315Z","M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q250 145 230 130Q190 151 148 130Q120 123 103 160Z","M95 164Q75 225 101 287Q109 305 119 311L112 205Z M265 164Q285 225 259 287Q251 305 241 311L248 205Z"],
+ ["M83 195Q55 55 180 35Q306 52 279 205L274 300Q257 350 226 365L130 365Q93 345 86 300Z","M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q245 147 225 132Q190 145 148 130Q120 123 103 160Z","M95 164Q78 225 102 278L120 294L112 205Z M265 164Q282 225 258 278L240 294L248 205Z"],
+ ["M88 185Q65 65 180 38Q295 65 272 185L269 260Q255 294 230 300L130 300Q105 294 91 260Z","M91 184Q72 90 144 57Q218 28 269 112Q278 137 268 181Q244 150 225 132Q190 148 148 130Q120 123 103 160Z","M96 165Q85 220 104 258L121 270L114 202Z M264 165Q275 220 256 258L239 270L246 202Z"],
+ ["M82 195Q55 45 180 35Q305 45 278 195L280 420Q260 450 235 410L225 170L135 170L125 410Q100 450 80 420Z","M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q250 145 230 130Q190 151 148 130Q120 123 103 160Z","M94 164Q74 225 101 365L119 402L112 205Z M266 164Q286 225 259 365L241 402L248 205Z"],
+ ["M82 195Q55 45 180 35Q305 45 278 195L280 420Q260 450 235 410L225 170L135 170L125 410Q100 450 80 420Z","M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q250 145 230 130Q190 151 148 130Q120 123 103 160Z","M94 164Q74 225 101 365L119 402L112 205Z M266 164Q286 225 259 365L241 402L248 205Z"],
+ ["M83 195Q55 55 180 35Q306 52 279 205L275 330Q260 382 226 393L130 393Q93 365 86 315Z M180 55Q250 5 265 85Q220 100 204 140Z","M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q250 145 230 130Q190 151 148 130Q120 123 103 160Z","M95 164Q75 225 101 287L119 311L112 205Z M265 164Q285 225 259 287L241 311L248 205Z"],
+ ["M83 195Q55 55 180 35Q306 52 279 205L275 330Q260 382 226 393L130 393Q93 365 86 315Z","M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q250 145 230 130Q190 151 148 130Q120 123 103 160Z","M95 164Q75 225 101 287L119 311L112 205Z M265 164Q285 225 259 287L241 311L248 205Z"],
+ ["M83 195Q55 55 180 35Q306 52 279 205L274 330Q260 382 226 393L130 393Q93 365 86 315Z","M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q250 145 230 130Q190 151 148 130Q120 123 103 160Z","M95 164Q75 225 101 287L119 311L112 205Z M265 164Q285 225 259 287L241 311L248 205Z"],
+ ["M88 185Q65 65 180 38Q295 65 272 185L269 260Q255 294 230 300L130 300Q105 294 91 260Z","M91 184Q72 90 144 57Q218 28 269 112Q278 137 268 181Q244 150 225 132Q190 148 148 130Q120 123 103 160Z","M96 165Q85 220 104 258L121 270L114 202Z M264 165Q275 220 256 258L239 270L246 202Z"],
+ ["M82 195Q55 45 180 35Q305 45 278 195L280 390Q260 425 235 390L225 170L135 170L125 390Q100 425 80 390Z","M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q250 145 230 130Q190 151 148 130Q120 123 103 160Z","M94 164Q74 225 101 340L119 380L112 205Z M266 164Q286 225 259 340L241 380L248 205Z"],
+ ["M90 190Q75 75 180 45Q285 75 270 190L265 250Q245 280 225 260L220 170L140 170L135 260Q115 280 95 250Z","M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q250 145 230 130Q190 151 148 130Q120 123 103 160Z","M96 165Q85 220 104 258L121 270L114 202Z M264 165Q275 220 256 258L239 270L246 202Z"],
+ ["M83 195Q55 55 180 35Q306 52 279 205L274 330Q260 382 226 393L130 393Q93 365 86 315Z","M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q250 145 230 130Q190 151 148 130Q120 123 103 160Z","M95 164Q75 225 101 287L119 311L112 205Z M265 164Q285 225 259 287L241 311L248 205Z"]
+ ];
+ const d=designs[n]||designs[0];back.setAttribute('d',d[0]);front.setAttribute('d',d[1]);sides.setAttribute('d',d[2]);
+ shine.setAttribute('opacity',n===6?'.18':'.55');
+}
+function applyOutfitDesign(){
+ const i=state.cloth===null?0:state.cloth, base=document.getElementById('outfit-base'),neck=document.getElementById('neckline'),panel=document.getElementById('frontpanel'),seam=document.getElementById('outfit-seam'),details=document.getElementById('outfit-details');
+ const colors=val('cloth','#d98baa'),light=shade(colors,35),dark=shade(colors,-32);
+ const necklines=[
+ "M139 335Q180 369 221 335L246 354Q222 392 180 394Q138 392 114 354Z",
+ "M145 335Q180 365 215 335L238 360Q220 389 180 394Q140 389 122 360Z",
+ "M148 335Q180 355 212 335L250 365Q225 390 180 390Q135 390 110 365Z",
+ "M140 335Q180 385 220 335L240 352Q220 370 180 375Q140 370 120 352Z",
+ "M148 335Q180 360 212 335L235 360Q210 382 180 383Q150 382 125 360Z",
+ "M142 335L218 335L238 355L222 380L180 366L138 380L122 355Z",
+ "M139 335Q180 369 221 335L246 354Q222 392 180 394Q138 392 114 354Z",
+ "M130 335Q180 375 230 335L250 355Q220 395 180 395Q140 395 110 355Z",
+ "M145 335Q180 360 215 335L242 354Q220 385 180 390Q140 385 118 354Z",
+ "M155 335L205 335L220 390L180 380L140 390Z",
+ "M138 335Q180 372 222 335L248 355Q220 398 180 400Q140 398 112 355Z",
+ "M145 335Q180 355 215 335L240 360Q215 385 180 390Q145 385 120 360Z",
+ "M139 335Q180 369 221 335L246 354Q222 392 180 394Q138 392 114 354Z",
+ "M150 335L210 335L235 360L220 380L180 366L140 380L125 360Z"
+ ];
+ base.setAttribute('fill','url(#cloth)');neck.setAttribute('d',necklines[i]||necklines[0]);neck.setAttribute('fill',light);
+ panel.setAttribute('fill',i===5?'#d7cbd8':light);seam.setAttribute('opacity',i===5?'.35':'.75');
+ let deco='';
+ if(i===0||i===10||i===12) deco='<path d="M145 352Q180 380 215 352" fill="none" stroke="'+light+'" stroke-width="5"/><path d="M180 360q-15 -15 -19 -2q2 10 19 12q17 -2 19 -12q-4 -13 -19 2" fill="'+light+'" stroke="'+dark+'"/>';
+ if(i===1||i===11) deco='<path d="M145 350Q180 376 215 350" fill="none" stroke="#fff4f7" stroke-width="3" stroke-dasharray="2 4"/><path d="M150 360L145 490M210 360L215 490" stroke="'+light+'" stroke-width="2"/>';
+ if(i===2||i===8) deco='<path d="M70 385Q90 360 115 366L105 420Q80 410 70 385ZM290 385Q270 360 245 366L255 420Q280 410 290 385Z" fill="'+light+'" stroke="'+dark+'"/><path d="M150 365L180 390L210 365" fill="none" stroke="'+dark+'" stroke-width="2"/>';
+ if(i===3) deco='<path d="M150 345L180 365L210 345" fill="none" stroke="#fff8ed" stroke-width="5"/><circle cx="180" cy="367" r="5" fill="'+light+'"/>';
+ if(i===4||i===9) deco='<path d="M155 350L180 365L205 350L198 490H162Z" fill="'+light+'" opacity=".65"/><path d="M180 365L180 490" stroke="'+dark+'" stroke-width="1.5"/>';
+ if(i===5) deco='<path d="M132 350L112 385M228 350L248 385" stroke="'+dark+'" stroke-width="7"/><path d="M145 360L180 380L215 360" fill="none" stroke="'+light+'" stroke-width="2"/>';
+ if(i===6||i===7||i===13) deco='<path d="M125 370L105 490M235 370L255 490" stroke="'+light+'" stroke-width="3" opacity=".8"/><path d="M155 385Q180 400 205 385" fill="none" stroke="'+dark+'" stroke-width="2"/>';
+ if(i===10) deco+='<path d="M70 420q25 -20 50 0t50 0t50 0t50 0" fill="none" stroke="'+light+'" stroke-width="3"/>';
+ details.innerHTML=deco;
+}
+\nfunction apply(){
+ const skin=val('skin','#edc6a8'), lip=val('lip','#c86d83'),blush=val('blush','#ef9e9e'),eye=val('eye','#e8b5c9'),hair=val('hair','#68445a'),liner=val('liner','#674b55'),brow=val('brows','#684454'),lens=val('lens','#80604f'),cloth=val('cloth','#d98baa'),hl=val('highlight','#fff0c5');
+ document.querySelectorAll('#avatar defs linearGradient#skin stop').forEach((st,i)=>st.setAttribute('stop-color',i===0?shade(skin,22):i===1?skin:shade(skin,-18)));\n document.querySelector('#face-skin').setAttribute('stroke',shade(skin,-24));document.querySelector('#neck-skin').setAttribute('stroke',shade(skin,-24));document.querySelectorAll('#ears-skin ellipse').forEach(e=>e.setAttribute('stroke',shade(skin,-20)));\n document.querySelector('#lips path').setAttribute('fill',lip);
+ document.querySelectorAll('#avatar defs linearGradient#hair stop').forEach((s,i)=>s.setAttribute('stop-color',i?shade(hair,-25):hair));\n applyHairDesign();
+ document.querySelectorAll('#avatar defs linearGradient#cloth stop').forEach((s,i)=>s.setAttribute('stop-color',i?shade(cloth,-24):cloth));\n applyOutfitDesign();
  document.getElementById('blush').innerHTML='<ellipse cx="119" cy="251" rx="22" ry="11" fill="'+blush+'" opacity=".48"/><ellipse cx="241" cy="251" rx="22" ry="11" fill="'+blush+'" opacity=".48"/>';
  document.getElementById('eyeshadow').innerHTML='<path d="M115 207Q138 187 161 207L157 218Q138 208 118 219Z M199 207Q222 187 245 207L242 219Q222 208 203 218Z" fill="'+eye+'" opacity=".82"/>';
  document.getElementById('liner').innerHTML='<path d="M115 214Q138 194 160 214L166 208Q160 220 157 219Q137 204 115 214ZM200 214Q222 194 244 214L250 208Q244 220 241 219Q221 204 200 214Z" fill="'+liner+'"/>';

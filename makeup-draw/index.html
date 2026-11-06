@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fff0f5"><title>반짝 메이크업 스튜디오</title>
+<style>
+:root{--pink:#e98eae;--deep:#985875;--ink:#593d4c;--line:#f1dce5}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 10% 5%,#ffe2ed,transparent 30%),linear-gradient(135deg,#fff9f5,#fbeaf3);font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;color:var(--ink)}header{text-align:center;padding:28px 15px 15px}.eyebrow{font-size:11px;letter-spacing:3px;color:#bd7895;font-weight:800}h1{font-size:clamp(28px,5vw,42px);margin:8px 0;color:#9b5878}header p{margin:0;color:#987b89}main{max-width:1060px;margin:auto;padding:12px 16px 35px;display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{background:#ffffffdf;border:1px solid white;border-radius:24px;padding:20px;box-shadow:0 14px 40px #b77b9418}.stage{min-height:610px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#fff0f6,#fff9f2);position:relative;overflow:hidden}.stage:before,.stage:after{content:"✦";position:absolute;color:#efb2c8;font-size:24px}.stage:before{top:24px;left:28px}.stage:after{right:30px;bottom:28px}.stage-title{align-self:flex-start;font-size:13px;font-weight:800;color:#b47791}#avatar{width:min(100%,390px);height:auto;filter:drop-shadow(0 14px 10px #c38ba633)}.mood{font-size:13px;color:#a27d8e;margin-top:3px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px}button{font:inherit;cursor:pointer;transition:.15s}button:hover{transform:translateY(-2px)}button:focus-visible{outline:3px solid #d77fa5;outline-offset:3px}.action{padding:10px 14px;border-radius:13px;background:white;border:1px solid var(--line);color:var(--deep);font-weight:700}.primary{background:linear-gradient(135deg,#ee9fbb,#d97fa4);color:white;border:0}.editor h2{font-size:20px;margin:2px 0 5px}.sub{font-size:13px;color:#a08793;margin:0 0 16px}.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px}.tab{padding:10px 3px;border-radius:12px;background:#fff3f7;color:#a36b84;font-size:12px;font-weight:800;border:1px solid transparent}.tab[aria-selected=true]{background:#e99bb7;color:white}.label{font-size:13px;font-weight:800;margin:16px 0 10px;color:#8f6177}.choices{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.choice{background:white;border:1px solid var(--line);border-radius:14px;padding:10px 4px;color:#755568;font-size:12px;min-height:72px}.swatch{display:block;width:29px;height:29px;border-radius:50%;margin:0 auto 6px;border:3px solid white;box-shadow:0 0 0 1px #ead6df}.choice[aria-pressed=true]{border:2px solid #df86a8;background:#fff5f8}.hint{margin-top:18px;padding:12px 14px;background:#fff5f8;border-radius:13px;color:#94657c;font-size:13px;line-height:1.5}.editor{align-self:start}.draw-tools{display:grid;gap:12px}.draw-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.draw-color{width:30px;height:30px;border-radius:50%;border:2px solid white;box-shadow:0 0 0 1px #ead6df;padding:0}.draw-color[aria-pressed=true]{outline:3px solid #df86a8;outline-offset:2px}.draw-tools input[type=range]{width:100%;accent-color:#d97fa4}.draw-note{font-size:12px;color:#987b89;line-height:1.5}#avatar.drawing{cursor:crosshair;touch-action:none}#paint-layer path{pointer-events:stroke}footer{text-align:center;color:#b18b9d;font-size:12px;padding:0 15px 22px}@media(max-width:760px){main{grid-template-columns:1fr;padding:8px 12px 25px;gap:13px}.stage{min-height:520px}.panel{padding:16px}}@media(max-width:360px){.tabs{grid-template-columns:repeat(3,1fr)}.choices{grid-template-columns:repeat(3,1fr)}}
+</style></head><body>
+<header><div class="eyebrow">✦ YOUR LITTLE BEAUTY PLAYGROUND ✦</div><h1>반짝 메이크업 스튜디오</h1><p>메이크업부터 헤어와 패션까지, 나만의 스타일을 완성해 봐!</p></header>
+<main><section class="panel stage" aria-label="메이크업 미리보기"><div class="stage-title">MY MAKEOVER ✨</div>
+<svg id="avatar" viewBox="0 0 360 510" role="img" aria-label="헤어와 메이크업, 옷을 꾸밀 수 있는 캐릭터">
+<defs>
+ <linearGradient id="skin" x2=".2" y2="1"><stop stop-color="#ffe7d7"/><stop offset=".55" stop-color="#f7cfb9"/><stop offset="1" stop-color="#eab49e"/></linearGradient>
+ <linearGradient id="hair" x2="1" y2="1"><stop stop-color="#49372f"/><stop offset=".55" stop-color="#352923"/><stop offset="1" stop-color="#211d1b"/></linearGradient>
+ <linearGradient id="cloth" x2="0" y2="1"><stop stop-color="#f5b9cf"/><stop offset="1" stop-color="#c9789d"/></linearGradient>
+ <radialGradient id="shine"><stop stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="180" cy="488" rx="112" ry="13" fill="#e8cbd7" opacity=".55"/>
+<!-- back hair -->
+<path id="hair-back" d="M83 195Q55 55 180 35Q306 52 279 205L274 330Q260 382 226 393L130 393Q93 365 86 315Z" fill="url(#hair)"/>
+<!-- shoulders and clothing, clearly separated from neck -->
+<path id="outfit-base" d="M119 342Q91 350 69 383Q48 418 42 490L318 490Q311 417 290 383Q269 350 241 342L215 333L145 333Z" fill="url(#cloth)" stroke="#a85f83" stroke-width="2"/>
+<path id="neckline" d="M139 335Q180 369 221 335L246 354Q222 392 180 394Q138 392 114 354Z" fill="#fff0f5" stroke="#d99ab5" stroke-width="2"/>
+<path id="frontpanel" d="M146 353Q180 379 214 353L201 490H159Z" fill="#fff8fa" opacity=".88"/>
+<path id="outfit-seam" d="M180 394V485" stroke="#e4a6be" stroke-width="2" opacity=".8"/><g id="outfit-details"></g>
+<circle cx="180" cy="414" r="3" fill="#c47b9a"/><circle cx="180" cy="438" r="3" fill="#c47b9a"/><circle cx="180" cy="462" r="3" fill="#c47b9a"/>
+<!-- neck -->
+<path id="neck-skin" d="M148 286L148 350Q180 375 212 350L212 286Z" fill="url(#skin)" stroke="#d99f8d" stroke-width="1.2"/>
+<path d="M149 322Q180 345 211 322" fill="none" stroke="#d69b8a" stroke-width="2" opacity=".45"/>
+<!-- ears -->
+<g id="ears-skin"><ellipse cx="99" cy="224" rx="15" ry="24" fill="url(#skin)" stroke="#dfaa98"/><ellipse cx="261" cy="224" rx="15" ry="24" fill="url(#skin)" stroke="#dfaa98"/></g>
+<!-- face: balanced oval -->
+<path id="face-skin" d="M103 166Q106 101 180 91Q254 101 257 166L248 245Q238 302 180 316Q122 302 112 245Z" fill="url(#skin)" stroke="#e8c8c8" stroke-width="1"/>
+<!-- face highlights -->
+<ellipse cx="145" cy="166" rx="26" ry="47" fill="url(#shine)" opacity=".30"/>
+<!-- soft facial shading for a more natural, dimensional look -->
+<ellipse cx="138" cy="239" rx="19" ry="5" fill="#bd817b" opacity=".07"/><ellipse cx="222" cy="239" rx="19" ry="5" fill="#bd817b" opacity=".07"/><path d="M174 231Q169 253 177 260" fill="none" stroke="#c58d7e" stroke-width="1.5" opacity=".28"/><path d="M181 229Q188 249 184 257" fill="none" stroke="#fff0e6" stroke-width="2" opacity=".65"/><path d="M160 280Q180 273 200 280" fill="none" stroke="#d89b91" stroke-width="1" opacity=".3"/>
+<!-- fringe and hair framing -->
+<path id="hair-front" d="M91 184Q69 89 144 57Q218 28 269 112Q278 137 268 181Q250 145 230 130Q190 151 148 130Q120 123 103 160Z" fill="url(#hair)"/>
+<path id="hair-shine" d="M103 150Q130 116 153 122Q180 132 201 126Q229 117 250 143Q219 139 197 145Q154 157 121 143Z" fill="#d8c1a0" opacity=".10"/>
+<path id="hair-sides" d="M95 164Q75 225 101 287Q109 305 119 311L112 205Z M265 164Q285 225 259 287Q251 305 241 311L248 205Z" fill="url(#hair)"/><g id="hair-detail"></g>
+
+<!-- brows -->
+<g id="brows"><path d="M118 188Q139 175 159 188M201 188Q221 175 242 188" fill="none" stroke="#59463f" stroke-width="3.2" stroke-linecap="round"/></g>
+<!-- shadow, liner, eyes -->
+<g id="eyeshadow"></g><g id="liner"></g>
+<g id="eyes"><path d="M115 212Q138 193 161 212Q140 237 115 212ZM199 212Q222 193 245 212Q220 237 199 212Z" fill="#fffdfb"/><ellipse cx="139" cy="215" rx="8.5" ry="11" fill="#80604f"/><ellipse cx="221" cy="215" rx="8.5" ry="11" fill="#80604f"/><ellipse cx="139" cy="215" rx="5" ry="8" fill="#392b32"/><ellipse cx="221" cy="215" rx="4.5" ry="7" fill="#392b32"/><circle cx="142" cy="210" r="3" fill="white"/><circle cx="223" cy="210" r="2.7" fill="white"/><path d="M116 214Q138 194 160 214M200 214Q222 194 244 214" fill="none" stroke="#59463f" stroke-width="2.1"/></g>
+<g id="lashes"></g><g id="lens"></g>
+<!-- nose and blush -->
+<g id="blush"></g><g id="highlight"></g>
+<path d="M180 224Q173 248 178 254Q182 257 186 252" fill="none" stroke="#d69b8a" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M172 266Q180 270 188 266" fill="none" stroke="#d99e91" stroke-width="1.5" opacity=".6"/>
+<g id="lips"><path d="M158 286Q169 278 180 283Q191 278 202 286Q193 300 180 301Q167 300 158 286Z" fill="#cf7890"/><path d="M162 287Q180 292 198 287" fill="none" stroke="#f8b7bf" stroke-width="2"/><path d="M169 298Q180 302 191 298" fill="none" stroke="#a9516b" stroke-width="1" opacity=".5"/></g>
+<g id="freckles"></g><g id="accessory"></g><g id="paint-layer"></g>
+<!-- neckline jewelry -->
+<g id="necklace"><path d="M145 347Q180 379 215 347" fill="none" stroke="#d6ad70" stroke-width="2"/><path d="M180 367L175 374L180 381L185 374Z" fill="#f8dfaa" stroke="#c69c62"/></g>
+</svg>
+<div class="mood" id="look-name">새로운 스타일을 골라봐요</div><div class="toolbar"><button class="action" id="random">🎲 랜덤 룩</button><button class="action" id="reset">↺ 처음으로</button><button class="action primary" id="finish">완성했어요! ✨</button></div></section>
+<section class="panel editor"><h2>뷰티 & 스타일 아이템</h2><p class="sub">카테고리를 바꾸고 다양한 아이템을 조합해 보세요.</p>
+<div class="tabs" role="tablist" aria-label="꾸미기 종류">
+<button class="tab" role="tab" aria-selected="true" data-tab="skin">🌷 피부</button><button class="tab" role="tab" aria-selected="false" data-tab="lip">💄 립</button><button class="tab" role="tab" aria-selected="false" data-tab="blush">🌸 블러셔</button><button class="tab" role="tab" aria-selected="false" data-tab="eye">🎨 섀도</button><button class="tab" role="tab" aria-selected="false" data-tab="liner">🖊️ 아이라인</button><button class="tab" role="tab" aria-selected="false" data-tab="lashes">✨ 속눈썹</button><button class="tab" role="tab" aria-selected="false" data-tab="brows">✍️ 눈썹</button><button class="tab" role="tab" aria-selected="false" data-tab="lens">👁️ 렌즈</button><button class="tab" role="tab" aria-selected="false" data-tab="hair">🎀 헤어 컬러</button><button class="tab" role="tab" aria-selected="false" data-tab="hairstyle">💇 헤어 디자인</button><button class="tab" role="tab" aria-selected="false" data-tab="highlight">💫 하이라이터</button><button class="tab" role="tab" aria-selected="false" data-tab="accessory">💎 액세서리</button><button class="tab" role="tab" aria-selected="false" data-tab="cloth">👗 의상 디자인</button><button class="tab" role="tab" aria-selected="false" data-tab="necklace">📿 목걸이</button><button class="tab" role="tab" aria-selected="false" data-tab="draw">✏️ 직접 그리기</button>
+</div><div id="options"></div><div class="hint" id="hint" aria-live="polite">마음에 드는 아이템을 선택해 봐! 정답은 없으니 네 취향대로 완성하면 돼 💗</div></section></main><footer>MAKE YOUR OWN SPARKLE · 나만의 스타일을 즐겨봐요</footer>
+<script>
+const palettes={
+skin:[["포슬린 화이트","#fff7f5"],["쿨 아이보리","#f8eeed"],["로즈 아이보리","#f5e3df"],["뉴트럴 베이지","#e9d1c7"],["로지 베이지","#e7b9ad"],["웜 베이지","#edc6a8"],["코코아 브라운","#98694f"],["딥 브라운","#704936"]],
+lip:[['체리 핑크','#d85d83'],['로즈','#b94e70'],['코랄','#ed826e'],['플럼','#98516f'],['피치','#ef9b91'],['베리','#bd4770'],['누드','#c9857e'],['라일락','#bd8eae'],['레드','#c94359'],['모브','#aa718e'],['글로스','#f2a6b5'],['브릭','#a94e55']],
+blush:[['베이비 핑크','#f28fa8'],['살구','#f4a27e'],['로즈','#df7891'],['라벤더','#c39acb'],['피치','#f5b49c'],['코랄','#ed7e79'],['모브','#bd849e'],['소프트','#e9a9b3'],['플럼 핑크','#c76f96'],['누드 피치','#d99a83']],
+eye:[['샴페인','#e9c88d'],['핑크 펄','#e9a5c0'],['라벤더','#b995ca'],['브론즈','#ad765e'],['민트','#9bc9b9'],['로즈 골드','#d89a91'],['스카이','#9dbbdf'],['초코','#79566a'],['실버','#c5c9d6'],['코랄','#e99a87'],['버건디','#9e596f'],['골드 글리터','#e3b95e']],
+liner:[['소프트 브라운','#76515a'],['딥 블랙','#302632'],['플럼','#80506e'],['네이비','#465b82'],['그린','#567b70'],['그레이','#777985']],
+lashes:[['내추럴','#674b55'],['또렷하게','#302632'],['롱 래쉬','#49303f'],['브라운 래쉬','#886050']],
+brows:[['내추럴 브라운','#805c50'],['다크 브라운','#533a3b'],['애쉬 브라운','#8a7776'],['소프트 블랙','#40333a'],['코코아','#9b7161']],
+lens:[['초코 브라운','#8a654c'],['올리브','#74846a'],['그레이','#8d9ba2'],['블루','#6e91b5'],['헤이즐','#aa8055'],['라벤더','#9b82b5'],['내추럴','#765b4c']],
+hair:[['내추럴 블랙','#292725'],['딥 에스프레소','#3b2d29'],['다크 초콜릿','#4b352d'],['쿨 모카 브라운','#66534a'],['클래식 체스트넛','#79513b'],['소프트 애쉬 브라운','#81766d'],['토프 브라운','#8b7868'],['베이지 브론드','#b69a79'],['샌드 베이지','#c5ad8c'],['허니 카라멜','#a8784e'],['웜 코코아','#8a6550'],['블루 블랙','#252d35']],
+hairstyle:[['허쉬컷 롱 레이어드','#765064'],['글램 S컬 롱 웨이브','#765064'],['내추럴 빌드펌 미디엄','#765064'],['레이어드 C컬 미디엄','#765064'],['시크 태슬컷 단발','#765064'],['볼륨 보브 C컬','#765064'],['프렌치 숏컷','#765064'],['하이 포니테일','#765064'],['우아한 로우 번','#765064'],['내추럴 트윈테일','#765064'],['로맨틱 반묶음 웨이브','#765064'],['시스루뱅 롱 스트레이트','#765064']],
+highlight:[['샴페인','#fff0c5'],['펄 핑크','#f7c7dc'],['골드','#efd18b'],['실버','#e2e5f1'],['라벤더','#e2c9f4']],
+accessory:[['진주 귀걸이','#f5e6dc'],['골드 링','#d5ad70'],['핑크 리본','#e88fb3'],['별 장식','#f2cf79'],['꽃 장식','#e9a0b6'],['하트 핀','#e8799e']],
+cloth:[['로맨틱 오프숄더 드레스','#d98baa'],['레이스 스퀘어넥 원피스','#a994c9'],['퍼프 슬리브 블라우스','#8ebcae'],['리본 카라 원피스','#e8d8c8'],['새틴 슬립 드레스','#8ca9ce'],['클래식 재킷 룩','#514253'],['플리츠 스커트 룩','#e9a38f'],['플라워 프린세스 드레스','#b84e64'],['니트 가디건 룩','#c58ca4'],['시크 홀터넥 드레스','#71849c'],['발레코어 튤 드레스','#e9b8cf'],['빈티지 스퀘어넥 드레스','#b98d73'],['리본 퍼프 드레스','#9b8abf'],['미니멀 셔츠 룩','#b6c8bd']],
+necklace:[['골드 목걸이','#d6ad70'],['진주 목걸이','#f1e3d4'],['리본 초커','#d982a5'],['실버 목걸이','#b8c2d4'],['하트 펜던트','#e8a0b5']]
+};
+const labels={skin:'피부 톤',lip:'립 컬러',blush:'블러셔 컬러',eye:'아이섀도',liner:'아이라인',lashes:'속눈썹',brows:'눈썹 컬러',lens:'렌즈 컬러',hair:'헤어 컬러',hairstyle:'헤어 디자인 & 기장',highlight:'하이라이터',accessory:'액세서리',cloth:'의상 디자인',necklace:'목걸이'};
+const state=Object.fromEntries(Object.keys(palettes).map(k=>[k,null]));
+const options=document.getElementById('options'),hint=document.getElementById('hint');let tab='skin';
+let drawColor='#d96b91',drawSize=5,drawMode='brush',drawing=false;
+function render(){
+ document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===tab)));
+ const avatar=document.getElementById('avatar');avatar.classList.toggle('drawing',tab==='draw');
+ if(tab==='draw'){
+  const colors=['#d96b91','#e9a1b8','#c78bc5','#b78a67','#d5ad70','#8ca9ce','#91b7a5','#ffffff','#49372f','#302632'];
+  options.innerHTML='<div class="draw-tools"><div class="label">브러시 색상</div><div class="draw-row">'+colors.map((v,i)=>'<button class="draw-color" data-color="'+v+'" aria-label="색상 '+(i+1)+'" aria-pressed="'+(drawColor===v)+'" style="background:'+v+'"></button>').join('')+'</div><div class="label">브러시 굵기 <span id="size-value">'+drawSize+'</span></div><input id="draw-size" type="range" min="1" max="22" value="'+drawSize+'"><div class="label">그리기 도구</div><div class="draw-row"><button class="action '+(drawMode==='brush'?'primary':'')+'" id="brush-mode">🖌️ 브러시</button><button class="action '+(drawMode==='eraser'?'primary':'')+'" id="eraser-mode">⌫ 지우개</button><button class="action" id="undo-draw">↶ 되돌리기</button><button class="action" id="clear-draw">전체 지우기</button></div><p class="draw-note">캐릭터 위에 직접 그려 보세요! 브러시로 색칠하고, 지우개 모드에서 지울 선을 톡 누르면 돼요. 그린 그림은 다른 메이크업을 바꿔도 유지돼요.</p></div>';
+  options.querySelectorAll('[data-color]').forEach(b=>b.addEventListener('click',()=>{drawColor=b.dataset.color;render()}));
+  document.getElementById('draw-size').addEventListener('input',e=>{drawSize=Number(e.target.value);document.getElementById('size-value').textContent=drawSize});
+  document.getElementById('brush-mode').onclick=()=>{drawMode='brush';render()};
+  document.getElementById('eraser-mode').onclick=()=>{drawMode='eraser';render()};
+  document.getElementById('undo-draw').onclick=()=>{const layer=document.getElementById('paint-layer');if(layer.lastElementChild)layer.lastElementChild.remove()};
+  document.getElementById('clear-draw').onclick=()=>{document.getElementById('paint-layer').replaceChildren()};
+  hint.textContent='캐릭터 위에 원하는 메이크업을 직접 그려 보세요. 립 컬러, 아이라인, 별이나 하트도 자유롭게!';return;
+ }
+ options.innerHTML='<div class="label">'+labels[tab]+' 선택</div><div class="choices">'+palettes[tab].map((v,i)=>'<button class="choice" data-index="'+i+'" aria-pressed="'+(state[tab]===i)+'"><span class="swatch" style="background:'+v[1]+'"></span>'+v[0]+'</button>').join('')+'</div>';
+ options.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{state[tab]=Number(b.dataset.index);apply();render();hint.textContent=palettes[tab][state[tab]][0]+' 아이템을 선택했어요. 다른 스타일과 조합해 보세요! ✨'}));
+}
+function val(k,def){return state[k]===null?def:palettes[k][state[k]][1]}
+function shade(hex,amt){let n=parseInt(hex.slice(1),16),r=Math.max(0,Math.min(255,(n>>16)+amt)),g=Math.max(0,Math.min(255,((n>>8)&255)+amt)),b=Math.max(0,Math.min(255,(n&255)+amt));return '#'+(1<<24|r<<16|g<<8|b).toString(16).slice(1)}
+
+function applyHairDesign(){
+ const n=state.hairstyle===null?0:state.hairstyle;
+ const back=document.getElementById('hair-back'),front=document.getElementById('hair-front'),sides=document.getElementById('hair-sides'),shine=document.getElementById('hair-shine');
+ const detail=document.getElementById('hair-detail');
+ // Each cut has its own silhouette: length, outline, fringe and styling details.
+ const styles=[
+  ["M79 190Q52 48 180 34Q308 48 281 190L292 365Q284 420 251 431Q232 431 229 397L231 205L218 180Q205 216 180 230Q154 216 142 180L129 205L131 397Q128 431 109 431Q76 420 68 365Z","M91 184Q68 91 143 56Q220 27 269 111Q280 139 267 181Q249 150 229 132Q206 152 180 150Q150 151 130 132Q109 144 99 170Z","M94 162Q74 230 94 345Q98 390 119 414L125 384Q111 320 119 230L113 194Z M266 162Q286 230 266 345Q262 390 241 414L235 384Q249 320 241 230L247 194Z"],
+  ["M77 190Q54 48 180 34Q306 48 283 190L300 330Q301 383 269 407Q244 423 229 389Q248 367 240 333Q229 385 207 414L180 433L153 414Q131 385 120 333Q112 367 131 389Q116 423 91 407Q59 383 60 330Z","M91 184Q68 91 143 56Q220 27 269 111Q280 139 267 181Q249 150 229 132Q206 152 180 150Q150 151 130 132Q109 144 99 170Z","M94 162Q72 230 93 335Q102 390 130 405Q116 363 126 319L113 194Z M266 162Q288 230 267 335Q258 390 230 405Q244 363 234 319L247 194Z"],
+  ["M80 190Q56 50 180 35Q304 50 280 190L283 330Q272 376 242 367L231 202L129 202L118 367Q88 376 77 330Z","M91 184Q68 91 143 56Q220 27 269 111Q280 139 267 181Q249 150 229 132Q206 152 180 150Q150 151 130 132Q109 144 99 170Z","M96 162Q78 220 99 305L119 350L124 220Z M264 162Q282 220 261 305L241 350L236 220Z"],
+  ["M82 190Q59 54 180 36Q301 54 278 190L275 298Q262 341 235 330L228 198L132 198L125 330Q98 341 85 298Z","M91 184Q68 91 143 56Q220 27 269 111Q280 139 267 181Q249 150 229 132Q206 152 180 150Q150 151 130 132Q109 144 99 170Z","M97 162Q82 215 104 278L123 320L123 210Z M263 162Q278 215 256 278L237 320L237 210Z"],
+  ["M85 190Q63 63 180 39Q297 63 275 190L268 270Q247 294 224 277L218 190L142 190L136 277Q113 294 92 270Z","M91 184Q70 92 143 57Q220 29 269 112Q278 140 267 181Q247 153 225 137Q202 150 180 146Q153 148 133 135Q112 146 100 171Z","M97 163Q84 213 104 254L123 279L119 207Z M263 163Q276 213 256 254L237 279L241 207Z"],
+  ["M83 190Q62 62 180 38Q298 62 277 190L275 278Q251 309 225 288L220 190L140 190L135 288Q109 309 85 278Z","M91 184Q70 92 143 57Q220 29 269 112Q278 140 267 181Q247 153 225 137Q202 150 180 146Q153 148 133 135Q112 146 100 171Z","M97 163Q84 213 104 263L123 290L119 207Z M263 163Q276 213 256 263L237 290L241 207Z"],
+  ["M86 188Q66 65 180 39Q294 65 274 188L271 245Q250 275 225 260L220 188L140 188L135 260Q110 275 89 245Z","M91 184Q70 92 143 57Q220 29 269 112Q278 140 267 181Q247 153 225 137Q202 150 180 146Q153 148 133 135Q112 146 100 171Z","M97 163Q86 207 105 241L122 261L119 207Z M263 163Q274 207 255 241L238 261L241 207Z"],
+  ["M78 190Q53 48 180 34Q307 48 282 190L286 355Q280 405 251 421Q229 431 224 402L230 198L130 198L136 402Q131 431 109 421Q80 405 74 355Z M231 73Q270 30 300 74Q325 116 286 158Q291 112 231 73Z","M91 184Q68 91 143 56Q220 27 269 111Q280 139 267 181Q249 150 229 132Q206 152 180 150Q150 151 130 132Q109 144 99 170Z","M94 162Q74 230 94 340L119 405L125 384Q111 320 119 230L113 194Z M266 162Q286 230 266 340L241 405L235 384Q249 320 241 230L247 194Z"],
+  ["M80 190Q56 49 180 35Q304 49 280 190L279 315Q266 359 235 371L225 198L135 198L125 371Q94 359 81 315Z M240 91Q260 53 287 73Q315 99 286 125Q276 99 240 91Z","M91 184Q68 91 143 56Q220 27 269 111Q280 139 267 181Q249 150 229 132Q206 152 180 150Q150 151 130 132Q109 144 99 170Z","M95 162Q76 225 99 310L122 365L125 384Q92 370 83 325Z M265 162Q284 225 261 310L238 365L235 384Q268 370 277 325Z"],
+  ["M78 190Q53 48 180 34Q307 48 282 190L293 370Q285 420 251 431Q232 431 229 397L231 205L218 180Q205 216 180 230Q154 216 142 180L129 205L131 397Q128 431 109 431Q75 420 67 370Z","M91 184Q68 91 143 56Q220 27 269 111Q280 139 267 181Q249 150 229 132Q206 152 180 150Q150 151 130 132Q109 144 99 170Z","M94 162Q74 230 94 345Q98 390 119 414L125 384Q111 320 119 230L113 194Z M266 162Q286 230 266 345Q262 390 241 414L235 384Q249 320 241 230L247 194Z"],
+  ["M78 190Q53 48 180 34Q307 48 282 190L292 365Q284 420 251 431Q232 431 229 397L231 205L218 180Q205 216 180 230Q154 216 142 180L129 205L131 397Q128 431 109 431Q76 420 68 365Z","M91 184Q68 91 143 56Q220 27 269 111Q280 139 267 181Q249 150 229 132Q206 152 180 150Q150 151 130 132Q109 144 99 170Z","M94 162Q74 230 94 345Q98 390 119 414L125 384Q111 320 119 230L113 194Z M266 162Q286 230 266 345Q262 390 241 414L235 384Q249 320 241 230L247 194Z"],
+  ["M79 190Q53 48 180 34Q307 48 281 190L293 372Q284 422 251 431Q232 431 229 397L231 205L218 180Q205 216 180 230Q154 216 142 180L129 205L131 397Q128 431 109 431Q76 420 67 372Z","M91 184Q68 91 143 56Q220 27 269 111Q280 139 267 181Q249 150 229 132Q206 152 180 150Q150 151 130 132Q109 144 99 170Z","M94 162Q74 230 94 345Q98 390 119 414L125 384Q111 320 119 230L113 194Z M266 162Q286 230 266 345Q262 390 241 414L235 384Q249 320 241 230L247 194Z"]
+ ];
+ const d=styles[n]||styles[0];back.setAttribute('d',d[0]);front.setAttribute('d',d[1]);sides.setAttribute('d',d[2]);
+ const strands=[
+  '<path d="M111 151Q130 91 157 78M127 160Q145 104 166 91M244 151Q225 91 203 78M232 163Q218 111 198 94M102 245Q96 320 116 375M258 245Q264 320 244 375" fill="none" stroke="'+shade(val('hair','#49372f'),18)+'" stroke-width="2.2" opacity=".48" stroke-linecap="round"/>',
+  '<path d="M108 150Q132 86 155 78M248 151Q226 86 204 78M105 260Q88 325 125 386Q145 410 155 416M255 260Q272 325 235 386Q215 410 205 416M143 370Q160 420 180 425Q200 420 217 370" fill="none" stroke="'+shade(val('hair','#68445a'),40)+'" stroke-width="2.5" opacity=".5" stroke-linecap="round"/>',
+  '<path d="M111 150Q134 91 157 78M245 150Q224 91 203 78M108 230Q103 270 119 319M252 230Q257 270 241 319" fill="none" stroke="'+shade(val('hair','#68445a'),42)+'" stroke-width="2.3" opacity=".48"/>',
+  '<path d="M112 151Q135 91 158 78M246 151Q223 91 202 78M112 225Q105 260 121 300M248 225Q255 260 239 300" fill="none" stroke="'+shade(val('hair','#68445a'),42)+'" stroke-width="2.2" opacity=".5"/>',
+  '<path d="M111 151Q134 91 157 78M245 151Q224 91 203 78M103 226Q99 254 117 273M257 226Q261 254 243 273" fill="none" stroke="'+shade(val('hair','#68445a'),42)+'" stroke-width="2.2" opacity=".5"/>',
+  '<path d="M111 151Q134 91 157 78M245 151Q224 91 203 78M104 230Q102 260 121 284M256 230Q258 260 239 284" fill="none" stroke="'+shade(val('hair','#68445a'),42)+'" stroke-width="2.2" opacity=".5"/>',
+  '<path d="M113 151Q135 91 158 78M244 151Q223 91 202 78" fill="none" stroke="'+shade(val('hair','#68445a'),42)+'" stroke-width="2.2" opacity=".5"/>',
+  '<path d="M111 151Q134 91 157 78M245 151Q224 91 203 78M287 99Q303 155 279 220Q266 260 278 300" fill="none" stroke="'+shade(val('hair','#68445a'),42)+'" stroke-width="2.5" opacity=".55"/><path d="M252 78Q275 42 297 82Q303 105 282 124" fill="none" stroke="'+shade(val('hair','#68445a'),25)+'" stroke-width="7" stroke-linecap="round"/>',
+  '<path d="M111 151Q134 91 157 78M245 151Q224 91 203 78" fill="none" stroke="'+shade(val('hair','#68445a'),42)+'" stroke-width="2.2" opacity=".5"/><path d="M246 96Q264 70 281 94Q285 115 265 125Q248 123 246 96Z" fill="'+shade(val('hair','#68445a'),12)+'" opacity=".7"/>',
+  '<path d="M111 151Q134 91 157 78M245 151Q224 91 203 78M105 255Q100 320 122 350M255 255Q260 320 238 350" fill="none" stroke="'+shade(val('hair','#68445a'),42)+'" stroke-width="2.3" opacity=".5"/>',
+  '<path d="M111 151Q134 91 157 78M245 151Q224 91 203 78M100 250Q92 325 120 385M260 250Q268 325 240 385" fill="none" stroke="'+shade(val('hair','#68445a'),42)+'" stroke-width="2.3" opacity=".5"/>',
+  '<path d="M111 151Q134 91 157 78M245 151Q224 91 203 78M100 250Q92 325 120 385M260 250Q268 325 240 385" fill="none" stroke="'+shade(val('hair','#68445a'),42)+'" stroke-width="2.3" opacity=".5"/>'
+ ];
+ detail.innerHTML=strands[n]||strands[0];
+ shine.setAttribute('opacity',n===8?'.04':'.10');
+}
+function applyOutfitDesign(){
+ const i=state.cloth===null?0:state.cloth, base=document.getElementById('outfit-base'),neck=document.getElementById('neckline'),panel=document.getElementById('frontpanel'),seam=document.getElementById('outfit-seam'),details=document.getElementById('outfit-details');
+ const colors=val('cloth','#d98baa'),light=shade(colors,35),dark=shade(colors,-32);
+ const necklines=[
+ "M139 335Q180 369 221 335L246 354Q222 392 180 394Q138 392 114 354Z",
+ "M145 335Q180 365 215 335L238 360Q220 389 180 394Q140 389 122 360Z",
+ "M148 335Q180 355 212 335L250 365Q225 390 180 390Q135 390 110 365Z",
+ "M140 335Q180 385 220 335L240 352Q220 370 180 375Q140 370 120 352Z",
+ "M148 335Q180 360 212 335L235 360Q210 382 180 383Q150 382 125 360Z",
+ "M142 335L218 335L238 355L222 380L180 366L138 380L122 355Z",
+ "M139 335Q180 369 221 335L246 354Q222 392 180 394Q138 392 114 354Z",
+ "M130 335Q180 375 230 335L250 355Q220 395 180 395Q140 395 110 355Z",
+ "M145 335Q180 360 215 335L242 354Q220 385 180 390Q140 385 118 354Z",
+ "M155 335L205 335L220 390L180 380L140 390Z",
+ "M138 335Q180 372 222 335L248 355Q220 398 180 400Q140 398 112 355Z",
+ "M145 335Q180 355 215 335L240 360Q215 385 180 390Q145 385 120 360Z",
+ "M139 335Q180 369 221 335L246 354Q222 392 180 394Q138 392 114 354Z",
+ "M150 335L210 335L235 360L220 380L180 366L140 380L125 360Z"
+ ];
+ base.setAttribute('fill','url(#cloth)');neck.setAttribute('d',necklines[i]||necklines[0]);neck.setAttribute('fill',light);
+ panel.setAttribute('fill',i===5?'#d7cbd8':light);seam.setAttribute('opacity',i===5?'.35':'.75');
+ let deco='';
+ if(i===0||i===10||i===12) deco='<path d="M145 352Q180 380 215 352" fill="none" stroke="'+light+'" stroke-width="5"/><path d="M180 360q-15 -15 -19 -2q2 10 19 12q17 -2 19 -12q-4 -13 -19 2" fill="'+light+'" stroke="'+dark+'"/>';
+ if(i===1||i===11) deco='<path d="M145 350Q180 376 215 350" fill="none" stroke="#fff4f7" stroke-width="3" stroke-dasharray="2 4"/><path d="M150 360L145 490M210 360L215 490" stroke="'+light+'" stroke-width="2"/>';
+ if(i===2||i===8) deco='<path d="M70 385Q90 360 115 366L105 420Q80 410 70 385ZM290 385Q270 360 245 366L255 420Q280 410 290 385Z" fill="'+light+'" stroke="'+dark+'"/><path d="M150 365L180 390L210 365" fill="none" stroke="'+dark+'" stroke-width="2"/>';
+ if(i===3) deco='<path d="M150 345L180 365L210 345" fill="none" stroke="#fff8ed" stroke-width="5"/><circle cx="180" cy="367" r="5" fill="'+light+'"/>';
+ if(i===4||i===9) deco='<path d="M155 350L180 365L205 350L198 490H162Z" fill="'+light+'" opacity=".65"/><path d="M180 365L180 490" stroke="'+dark+'" stroke-width="1.5"/>';
+ if(i===5) deco='<path d="M132 350L112 385M228 350L248 385" stroke="'+dark+'" stroke-width="7"/><path d="M145 360L180 380L215 360" fill="none" stroke="'+light+'" stroke-width="2"/>';
+ if(i===6||i===7||i===13) deco='<path d="M125 370L105 490M235 370L255 490" stroke="'+light+'" stroke-width="3" opacity=".8"/><path d="M155 385Q180 400 205 385" fill="none" stroke="'+dark+'" stroke-width="2"/>';
+ if(i===10) deco+='<path d="M70 420q25 -20 50 0t50 0t50 0t50 0" fill="none" stroke="'+light+'" stroke-width="3"/>';
+ details.innerHTML=deco;
+}
+
+function apply(){
+ const skin=val('skin','#fff7f5'), lip=val('lip','#c86d83'),blush=val('blush','#ef9e9e'),eye=val('eye','#e8b5c9'),hair=val('hair','#68445a'),liner=val('liner','#674b55'),brow=val('brows','#59463f'),lens=val('lens','#80604f'),cloth=val('cloth','#d98baa'),hl=val('highlight','#fff0c5');
+ document.querySelectorAll('#avatar defs linearGradient#skin stop').forEach((st,i)=>st.setAttribute('stop-color',i===0?shade(skin,8):i===1?skin:shade(skin,-10)));
+ document.querySelector('#face-skin').setAttribute('stroke',shade(skin,-24));document.querySelector('#neck-skin').setAttribute('stroke',shade(skin,-24));document.querySelectorAll('#ears-skin ellipse').forEach(e=>e.setAttribute('stroke',shade(skin,-20)));
+ document.querySelector('#lips path').setAttribute('fill',lip);
+ document.querySelectorAll('#avatar defs linearGradient#hair stop').forEach((s,i)=>s.setAttribute('stop-color',i?shade(hair,-25):hair));
+ applyHairDesign();
+ document.querySelectorAll('#avatar defs linearGradient#cloth stop').forEach((s,i)=>s.setAttribute('stop-color',i?shade(cloth,-24):cloth));
+ applyOutfitDesign();
+ document.getElementById('blush').innerHTML='<ellipse cx="119" cy="251" rx="22" ry="11" fill="'+blush+'" opacity=".48"/><ellipse cx="241" cy="251" rx="22" ry="11" fill="'+blush+'" opacity=".48"/>';
+ document.getElementById('eyeshadow').innerHTML='<path d="M115 207Q138 187 161 207L157 218Q138 208 118 219Z M199 207Q222 187 245 207L242 219Q222 208 203 218Z" fill="'+eye+'" opacity=".82"/>';
+ document.getElementById('liner').innerHTML='<path d="M115 214Q138 194 160 214L166 208Q160 220 157 219Q137 204 115 214ZM200 214Q222 194 244 214L250 208Q244 220 241 219Q221 204 200 214Z" fill="'+liner+'"/>';
+ document.getElementById('lashes').innerHTML=state.lashes===null?'':'<path d="M117 211l-5 -7m12 3l-2 -8m12 5v-9m10 9l3 -8m56 8l-3 -8m13 8v-9m13 9l2 -8m10 8l5 -7" stroke="'+palettes.lashes[state.lashes][1]+'" stroke-width="2.4" stroke-linecap="round"/>';
+ document.getElementById('brows').querySelectorAll('path').forEach(p=>p.setAttribute('stroke',brow));
+ document.querySelectorAll('#eyes ellipse').forEach((e,i)=>{if(i<2)e.setAttribute('fill',lens)});
+ document.getElementById('lens').innerHTML=state.lens===null?'':'<circle cx="139" cy="215" r="13" fill="none" stroke="'+lens+'" stroke-width="1.4" opacity=".8"/><circle cx="221" cy="215" r="13" fill="none" stroke="'+lens+'" stroke-width="1.4" opacity=".8"/>';
+ document.getElementById('highlight').innerHTML=state.highlight===null?'':'<ellipse cx="123" cy="244" rx="12" ry="4" fill="'+hl+'" opacity=".65"/><ellipse cx="237" cy="244" rx="12" ry="4" fill="'+hl+'" opacity=".65"/><path d="M177 247l3 -8 3 8" stroke="'+hl+'" stroke-width="3" fill="none" stroke-linecap="round"/>';
+ document.getElementById('accessory').innerHTML=state.accessory===null?'':'<circle cx="99" cy="242" r="5" fill="'+val('accessory','#f5e6dc')+'" stroke="#d6ad70"/><circle cx="261" cy="242" r="5" fill="'+val('accessory','#f5e6dc')+'" stroke="#d6ad70"/><path d="M88 135q-13 -15 0 -22q13 7 0 22q-13 -15 -25 -5q10 17 25 5" fill="'+val('accessory','#f5e6dc')+'" stroke="#c47c9b" stroke-width="1.5"/>';
+ const nk=val('necklace','#d6ad70');document.getElementById('necklace').innerHTML='<path d="M145 347Q180 379 215 347" fill="none" stroke="'+nk+'" stroke-width="2.5"/><path d="M180 367L174 374L180 383L186 374Z" fill="'+nk+'" stroke="#c69c62"/>';
+ document.getElementById('look-name').textContent=Object.values(state).every(v=>v===null)?'새로운 스타일을 골라봐요':'나만의 믹스 앤 매치 룩 💕';
+}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{tab=b.dataset.tab;render()}));
+const avatar=document.getElementById('avatar'),paintLayer=document.getElementById('paint-layer');
+function svgPoint(e){const p=avatar.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(avatar.getScreenCTM().inverse())}
+avatar.addEventListener('pointerdown',e=>{
+ if(tab!=='draw')return;
+ const target=e.target.closest&&e.target.closest('#paint-layer path');
+ if(drawMode==='eraser'){if(target)target.remove();return}
+ e.preventDefault();avatar.setPointerCapture(e.pointerId);drawing=true;const p=svgPoint(e);
+ const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+ path.dataset.doodle='true';path.setAttribute('d','M '+p.x+' '+p.y);path.setAttribute('fill','none');path.setAttribute('stroke',drawColor);path.setAttribute('stroke-width',drawSize);path.setAttribute('stroke-linecap','round');path.setAttribute('stroke-linejoin','round');paintLayer.appendChild(path);
+});
+avatar.addEventListener('pointermove',e=>{if(!drawing||tab!=='draw')return;const p=svgPoint(e),path=paintLayer.lastElementChild;path.setAttribute('d',path.getAttribute('d')+' L '+p.x+' '+p.y)});
+function stopDrawing(){drawing=false}
+avatar.addEventListener('pointerup',stopDrawing);avatar.addEventListener('pointercancel',stopDrawing);avatar.addEventListener('lostpointercapture',stopDrawing);
+document.getElementById('reset').onclick=()=>{Object.keys(state).forEach(k=>state[k]=null);document.getElementById('paint-layer').replaceChildren();apply();render();hint.textContent='처음 모습으로 돌아왔어요. 새롭게 꾸며 볼까요? 🌷'};
+document.getElementById('random').onclick=()=>{Object.keys(state).forEach(k=>state[k]=Math.floor(Math.random()*palettes[k].length));apply();render();hint.textContent='랜덤으로 메이크업과 패션을 조합했어요! 마음에 안 드는 아이템은 바꿔도 좋아요 🎲'};
+document.getElementById('finish').onclick=()=>{hint.textContent='짜잔! 나만의 스타일 완성 🎉 멋진 조합이에요. 다른 아이템으로 또 꾸며 볼까요?';document.getElementById('look-name').textContent='✨ 오늘의 스타일 완성 ✨'};
+render();apply();
+</script></body></html>

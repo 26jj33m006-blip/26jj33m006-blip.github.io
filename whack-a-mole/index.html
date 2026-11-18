@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7f5ef">
+<title>두더지 팡팡! | Whack-a-Mole</title>
+<style>
+:root{--ink:#30352f;--muted:#858b80;--green:#73966d;--green-dark:#557650;--cream:#f7f5ef;--card:#fffefa;--pink:#f5b8b0;--yellow:#f6d77c}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif}
+button{font:inherit}
+.page{width:min(920px,100% - 32px);margin:0 auto;padding:34px 0 48px}
+header{text-align:center;margin-bottom:22px}
+.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--green-dark);font-weight:800}
+h1{font-size:clamp(32px,6vw,48px);margin:7px 0 5px;letter-spacing:-.06em}
+.subtitle{margin:0;color:var(--muted);font-size:14px}
+.game-card{background:var(--card);border:1px solid #e9e6dc;border-radius:28px;padding:clamp(16px,4vw,30px);box-shadow:0 16px 45px #565b4610}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.stat{background:#f4f3ec;border-radius:17px;padding:12px;text-align:center}
+.stat span{display:block;color:var(--muted);font-size:12px;font-weight:700}
+.stat strong{display:block;font-size:27px;line-height:1.35;font-variant-numeric:tabular-nums}
+.stat strong small{font-size:14px}
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(9px,2vw,18px);max-width:610px;margin:0 auto}
+.hole{position:relative;aspect-ratio:1.12;border:0;border-radius:24px;background:linear-gradient(180deg,#e6efdf,#d8e5cf);overflow:hidden;cursor:pointer;box-shadow:inset 0 -7px 0 #c4d4b9;touch-action:manipulation}
+.hole:focus-visible{outline:4px solid var(--yellow);outline-offset:3px}
+.hole::after{content:"";position:absolute;left:12%;right:12%;bottom:13%;height:29%;border-radius:50%;background:#7d6049;box-shadow:inset 0 7px 0 #604733;z-index:3}
+.mole{position:absolute;z-index:2;left:50%;bottom:22%;transform:translate(-50%,100%) scale(.75);font-size:clamp(43px,9vw,68px);line-height:1;transition:transform .16s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 5px 2px #59452a30);user-select:none}
+.hole.active .mole{transform:translate(-50%,0) scale(1)}
+.hole.hit .mole{transform:translate(-50%,-10%) scale(.85);filter:brightness(1.15)}
+.hole .spark{position:absolute;z-index:4;top:17%;left:50%;transform:translateX(-50%);font-size:24px;opacity:0}
+.hole.hit .spark{animation:pop .45s ease forwards}
+@keyframes pop{0%{opacity:0;transform:translate(-50%,15px) scale(.5)}35%{opacity:1;transform:translate(-50%,-10px) scale(1.2)}100%{opacity:0;transform:translate(-50%,-35px) scale(.8)}}
+.controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{border:0;border-radius:999px;padding:13px 25px;font-weight:800;cursor:pointer;transition:transform .15s,background .15s}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--green);color:white;box-shadow:0 5px 0 var(--green-dark)}
+.btn-primary:hover{background:var(--green-dark)}
+.btn-secondary{background:#f0eee6;color:#60665b}
+.message{text-align:center;min-height:28px;margin:17px 0 0;color:var(--green-dark);font-size:14px;font-weight:700}
+.instructions{margin:18px 0 0;text-align:center;color:var(--muted);font-size:13px;line-height:1.7}
+footer{text-align:center;color:#a2a498;font-size:11px;margin-top:20px}
+@media(max-width:480px){.page{width:min(100% - 20px,600px);padding-top:24px}.game-card{border-radius:22px}.hole{border-radius:17px}.stat{padding:9px 5px}.stat strong{font-size:23px}}
+</style>
+</head>
+<body>
+<main class="page">
+<header>
+  <div class="eyebrow">CUTE ARCADE GAME</div>
+  <h1>🐹 두더지 팡팡!</h1>
+  <p class="subtitle">깜짝 등장하는 두더지를 톡톡 눌러 봐!</p>
+</header>
+<section class="game-card" aria-label="두더지 잡기 게임">
+  <div class="stats">
+    <div class="stat"><span>점수</span><strong id="score">0</strong></div>
+    <div class="stat"><span>남은 시간</span><strong><b id="time">30</b><small>초</small></strong></div>
+    <div class="stat"><span>최고 점수</span><strong id="best">0</strong></div>
+  </div>
+  <div class="board" id="board" aria-label="두더지 구멍 9개">
+    <button class="hole" type="button" aria-label="1번 구멍"><span class="mole" aria-hidden="true">🐹</span><span class="spark" aria-hidden="true">✨</span></button>\n    <button class="hole" type="button" aria-label="2번 구멍"><span class="mole" aria-hidden="true">🐹</span><span class="spark" aria-hidden="true">✨</span></button>\n    <button class="hole" type="button" aria-label="3번 구멍"><span class="mole" aria-hidden="true">🐹</span><span class="spark" aria-hidden="true">✨</span></button>\n    <button class="hole" type="button" aria-label="4번 구멍"><span class="mole" aria-hidden="true">🐹</span><span class="spark" aria-hidden="true">✨</span></button>\n    <button class="hole" type="button" aria-label="5번 구멍"><span class="mole" aria-hidden="true">🐹</span><span class="spark" aria-hidden="true">✨</span></button>\n    <button class="hole" type="button" aria-label="6번 구멍"><span class="mole" aria-hidden="true">🐹</span><span class="spark" aria-hidden="true">✨</span></button>\n    <button class="hole" type="button" aria-label="7번 구멍"><span class="mole" aria-hidden="true">🐹</span><span class="spark" aria-hidden="true">✨</span></button>\n    <button class="hole" type="button" aria-label="8번 구멍"><span class="mole" aria-hidden="true">🐹</span><span class="spark" aria-hidden="true">✨</span></button>\n    <button class="hole" type="button" aria-label="9번 구멍"><span class="mole" aria-hidden="true">🐹</span><span class="spark" aria-hidden="true">✨</span></button>
+  </div>
+  <div class="controls">
+    <button class="btn btn-primary" id="start">게임 시작!</button>
+    <button class="btn btn-secondary" id="reset">점수 초기화</button>
+  </div>
+  <p class="message" id="message" role="status" aria-live="polite">시작 버튼을 누르면 30초 동안 게임이 진행돼!</p>
+  <p class="instructions">두더지가 나타난 구멍을 빠르게 클릭하거나 터치해 봐.<br>한 번 잡을 때마다 10점! 연속으로 잡으면 콤보 보너스도 있어.</p>
+</section>
+<footer>WHACK-A-MOLE · HAVE A FUN DAY!</footer>
+</main>
+<script>
+const holes=[...document.querySelectorAll('.hole')];
+const scoreEl=document.getElementById('score');
+const timeEl=document.getElementById('time');
+const bestEl=document.getElementById('best');
+const messageEl=document.getElementById('message');
+const startBtn=document.getElementById('start');
+let score=0,time=30,best=Number(localStorage.getItem('moleBest')||0);
+let playing=false,current=-1,spawnTimer=null,countdown=null,hideTimer=null,combo=0;
+bestEl.textContent=best;
+function clearTimers(){clearTimeout(spawnTimer);clearTimeout(hideTimer);clearInterval(countdown)}
+function hideMole(){if(current>=0){holes[current].classList.remove('active');current=-1}}
+function scheduleMole(){
+ if(!playing)return;
+ if(current>=0)hideMole();
+ let next=Math.floor(Math.random()*holes.length);
+ if(holes.length>1&&next===current)next=(next+1)%holes.length;
+ current=next;
+ const hole=holes[current];hole.classList.remove('hit');hole.classList.add('active');
+ const visible=Math.max(430,850-Math.floor(score/40)*35);
+ hideTimer=setTimeout(()=>{if(current===next){hideMole();combo=0}},visible);
+ spawnTimer=setTimeout(scheduleMole,Math.max(520,1050-Math.floor(score/50)*35));
+}
+function endGame(){
+ playing=false;clearTimers();hideMole();holes.forEach(h=>h.classList.remove('active'));
+ if(score>best){best=score;localStorage.setItem('moleBest',String(best));bestEl.textContent=best;messageEl.textContent='🎉 신기록 달성! 정말 잘했어!'}
+ else messageEl.textContent='게임 끝! 총 '+score+'점을 얻었어. 다시 도전해 볼까?';
+ startBtn.textContent='다시 도전!';
+}
+function startGame(){
+ clearTimers();hideMole();holes.forEach(h=>h.classList.remove('active','hit'));
+ score=0;time=30;combo=0;playing=true;
+ scoreEl.textContent=score;timeEl.textContent=time;
+ messageEl.textContent='두더지를 잡아 봐! 파이팅!';startBtn.textContent='게임 진행 중…';startBtn.disabled=true;
+ scheduleMole();
+ countdown=setInterval(()=>{time--;timeEl.textContent=time;if(time<=0){startBtn.disabled=false;endGame()}},1000);
+}
+holes.forEach(hole=>hole.addEventListener('click',()=>{
+ if(!playing||!hole.classList.contains('active'))return;
+ const index=holes.indexOf(hole);
+ if(index!==current)return;
+ clearTimeout(hideTimer);hole.classList.remove('active');hole.classList.add('hit');
+ combo++;score+=10+(combo>=3?5:0);scoreEl.textContent=score;
+ messageEl.textContent=combo>=3?'🔥 '+combo+'콤보! 보너스 점수!':'잘 잡았어! +10점';
+ current=-1;
+}));
+startBtn.addEventListener('click',()=>{if(!playing)startGame()});
+document.getElementById('reset').addEventListener('click',()=>{
+ if(playing){playing=false;clearTimers();hideMole();startBtn.disabled=false;startBtn.textContent='게임 시작!'}
+ score=0;time=30;combo=0;scoreEl.textContent=0;timeEl.textContent=30;best=0;bestEl.textContent=0;
+ localStorage.removeItem('moleBest');holes.forEach(h=>h.classList.remove('active','hit'));
+ messageEl.textContent='점수를 초기화했어. 새롭게 도전해 봐!';
+});
+</script>
+</body>
+</html>

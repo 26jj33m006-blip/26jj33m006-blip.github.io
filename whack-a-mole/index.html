@@ -23,7 +23,7 @@ h1{font-size:clamp(32px,6vw,48px);margin:7px 0}
 .stat small{font-size:13px;margin-left:3px}
 .board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(9px,2vw,18px);max-width:620px;margin:auto}
 .hole{position:relative;aspect-ratio:1.12;border:0;border-radius:22px;background:linear-gradient(#e9f0e3,#dce8d4);overflow:hidden;cursor:pointer;isolation:isolate;touch-action:manipulation;padding:0}
-.hole:focus-visible{outline:4px solid #e9c96f;outline-offset:3px}
+.hole:focus-visible{outline:4px solid #e9c96f;outline-offset:3px}\n.hole>*{pointer-events:none}
 .mascot{position:absolute;z-index:2;left:50%;bottom:13%;width:76%;height:90%;transform:translate(-50%,115%);transition:transform .3s cubic-bezier(.2,.8,.2,1);pointer-events:none;display:block}
 .hole.active .mascot{transform:translate(-50%,0)}
 .hole.hit .mascot{transform:translate(-50%,-5%) scale(.94)}
@@ -64,6 +64,7 @@ footer{text-align:center;color:#a2a498;font-size:11px;margin-top:20px}
 <script>
 "use strict";
 const board=document.getElementById("board");
+const holes=[...board.querySelectorAll(".hole")];
 const scoreEl=document.getElementById("score");
 const timeEl=document.getElementById("time");
 const bestEl=document.getElementById("best");
@@ -71,73 +72,105 @@ const messageEl=document.getElementById("message");
 const startBtn=document.getElementById("start");
 const resetBtn=document.getElementById("reset");
 const GAME_SECONDS=60;
-const mascotSvg=`<svg viewBox="0 0 120 132" role="img" aria-label="둥근 흰 담곰이 캐릭터">
-<path d="M29 26 C27 13 43 11 47 25 C55 21 65 21 73 25 C77 11 93 13 91 27 C106 36 109 51 106 68 C105 76 100 82 96 86 L103 96 Q106 103 99 106 L94 105 L91 116 Q88 123 81 120 L75 111 L45 111 L39 121 Q32 125 29 117 L27 106 L20 108 Q13 105 17 97 L24 85 C17 78 13 69 14 56 C14 42 19 32 29 26 Z" fill="#fff" stroke="#e9e8e4" stroke-width="1.5" stroke-linejoin="round"/>
-<path d="M35 25 Q40 19 45 27 M76 27 Q82 19 87 25" fill="none" stroke="#f4f3ef" stroke-width="2" stroke-linecap="round"/>
-<ellipse cx="39" cy="57" rx="2.5" ry="3.1" fill="#292929"/><ellipse cx="81" cy="57" rx="2.5" ry="3.1" fill="#292929"/>
-<ellipse cx="28" cy="70" rx="9" ry="6.5" fill="#f4a45e" opacity=".92"/><ellipse cx="92" cy="70" rx="9" ry="6.5" fill="#f4a45e" opacity=".92"/>
-<path d="M23 68 l4 -3 M27 73 l4 -4 M87 68 l4 -3 M91 73 l4 -4" stroke="#a85e38" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M56 68 Q60 64 64 68 Q60 73 56 68 M60 72 Q60 81 54 81 Q49 81 49 76 M60 72 Q60 81 66 81 Q71 81 71 76" fill="none" stroke="#292929" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`;
-const holes=[];
-for(let i=0;i<9;i++){
- const hole=document.createElement("button");
- hole.type="button";hole.className="hole";hole.setAttribute("aria-label",(i+1)+"번 구멍");
- hole.innerHTML='<span class="mascot" aria-hidden="true">'+mascotSvg+'</span><span class="dirt" aria-hidden="true"></span><span class="grass" aria-hidden="true"></span><span class="spark" aria-hidden="true">✨</span>';
- hole.addEventListener("click",()=>hitHole(i));
- board.appendChild(hole);holes.push(hole);
-}
 let score=0,time=GAME_SECONDS,best=0,combo=0,playing=false,current=-1;
-let roundTimer=null,countdownTimer=null;
-try{best=Math.max(0,Number(localStorage.getItem("bearBest")||0)||0)}catch(e){best=0}
-bestEl.textContent=best;
-function clearGameTimers(){if(roundTimer!==null){clearTimeout(roundTimer);roundTimer=null}if(countdownTimer!==null){clearInterval(countdownTimer);countdownTimer=null}}
-function hideCurrent(){if(current>=0)holes[current].classList.remove("active");current=-1}
+let spawnTimer=null,hideTimer=null,countdownTimer=null;
+try{best=Math.max(0,Number(localStorage.getItem("bearBest")||0)||0)}catch(error){best=0}
+bestEl.textContent=String(best);
+
+function clearTimers(){
+ if(spawnTimer!==null){clearTimeout(spawnTimer);spawnTimer=null}
+ if(hideTimer!==null){clearTimeout(hideTimer);hideTimer=null}
+ if(countdownTimer!==null){clearInterval(countdownTimer);countdownTimer=null}
+}
+function hideCurrent(){
+ if(current>=0) holes[current].classList.remove("active");
+ current=-1;
+}
 function finishGame(){
  if(!playing)return;
- playing=false;clearGameTimers();hideCurrent();
- if(score>best){best=score;bestEl.textContent=best;try{localStorage.setItem("bearBest",String(best))}catch(e){}messageEl.textContent="🎉 최고 기록 달성! 정말 잘했어!"}
- else messageEl.textContent="게임 끝! "+score+"점을 얻었어. 다시 도전해 볼까?";
+ playing=false;clearTimers();hideCurrent();
+ if(score>best){
+  best=score;bestEl.textContent=String(best);
+  try{localStorage.setItem("bearBest",String(best))}catch(error){}
+  messageEl.textContent="🎉 최고 기록 달성! 정말 잘했어!";
+ }else{
+  messageEl.textContent="게임 끝! "+score+"점을 얻었어. 다시 도전해 볼까?";
+ }
  startBtn.disabled=false;startBtn.textContent="다시 도전!";
+}
+function scheduleNext(delay=220){
+ if(!playing)return;
+ if(spawnTimer!==null)clearTimeout(spawnTimer);
+ spawnTimer=setTimeout(()=>{spawnTimer=null;showNext()},delay);
 }
 function showNext(){
  if(!playing)return;
  hideCurrent();
  const next=Math.floor(Math.random()*holes.length);
  current=next;
- const hole=holes[next];hole.classList.remove("hit");hole.classList.add("active");
- const visibleMs=Math.max(760,1450-Math.floor(score/50)*35);
- roundTimer=setTimeout(()=>{
-  roundTimer=null;
-  if(!playing)return;
-  if(current===next){hideCurrent();combo=0;}
-  showNext();
+ const hole=holes[next];
+ hole.classList.remove("hit");
+ hole.classList.add("active");
+ const visibleMs=Math.max(900,1550-Math.floor(score/50)*25);
+ if(hideTimer!==null)clearTimeout(hideTimer);
+ hideTimer=setTimeout(()=>{
+  hideTimer=null;
+  if(!playing||current!==next)return;
+  hideCurrent();combo=0;scheduleNext(180);
  },visibleMs);
 }
 function hitHole(index){
- if(!playing||index!==current||!holes[index].classList.contains("active"))return;
- if(roundTimer!==null){clearTimeout(roundTimer);roundTimer=null}
- holes[index].classList.remove("active");holes[index].classList.add("hit");
- current=-1;combo++;score+=10+(combo>=3?5:0);scoreEl.textContent=score;
- messageEl.textContent=combo>=3?"🔥 "+combo+"콤보! 보너스 점수!":"잘 잡았어! +10점";
- roundTimer=setTimeout(()=>{roundTimer=null;showNext()},260);
+ if(!playing||index!==current)return;
+ const hole=holes[index];
+ if(!hole||!hole.classList.contains("active"))return;
+ if(hideTimer!==null){clearTimeout(hideTimer);hideTimer=null}
+ hole.classList.remove("active");
+ hole.classList.add("hit");
+ current=-1;
+ combo++;
+ const gained=10+(combo>=3?5:0);
+ score+=gained;
+ scoreEl.textContent=String(score);
+ messageEl.textContent=combo>=3?"🔥 "+combo+"콤보! +"+gained+"점 보너스!":"성공! +10점";
+ scheduleNext(240);
 }
 function startGame(){
- clearGameTimers();holes.forEach(h=>h.classList.remove("active","hit"));current=-1;
- score=0;time=GAME_SECONDS;combo=0;playing=true;
+ clearTimers();
+ holes.forEach(h=>h.classList.remove("active","hit"));
+ current=-1;score=0;time=GAME_SECONDS;combo=0;playing=true;
  scoreEl.textContent="0";timeEl.textContent=String(GAME_SECONDS);
- messageEl.textContent="농담곰을 잡아 봐!";startBtn.disabled=true;startBtn.textContent="게임 진행 중…";
+ messageEl.textContent="담곰이를 눌러 봐!";
+ startBtn.disabled=true;startBtn.textContent="게임 진행 중…";
  showNext();
- countdownTimer=setInterval(()=>{if(!playing)return;time=Math.max(0,time-1);timeEl.textContent=String(time);if(time===0)finishGame()},1000);
+ countdownTimer=setInterval(()=>{
+  if(!playing)return;
+  time=Math.max(0,time-1);
+  timeEl.textContent=String(time);
+  if(time===0)finishGame();
+ },1000);
 }
-startBtn.addEventListener("click",()=>{if(!playing)startGame()});
-resetBtn.addEventListener("click",()=>{
- playing=false;clearGameTimers();hideCurrent();holes.forEach(h=>h.classList.remove("hit"));
+function resetGame(){
+ playing=false;clearTimers();hideCurrent();
+ holes.forEach(h=>h.classList.remove("active","hit"));
  score=0;time=GAME_SECONDS;combo=0;best=0;
  scoreEl.textContent="0";timeEl.textContent=String(GAME_SECONDS);bestEl.textContent="0";
- try{localStorage.removeItem("bearBest")}catch(e){}
- startBtn.disabled=false;startBtn.textContent="게임 시작!";messageEl.textContent="점수와 최고 기록을 초기화했어!";
+ try{localStorage.removeItem("bearBest")}catch(error){}
+ startBtn.disabled=false;startBtn.textContent="게임 시작!";
+ messageEl.textContent="점수와 최고 기록을 초기화했어!";
+}
+// Pointer events register the hit immediately; click remains for keyboard activation.
+holes.forEach((hole,index)=>{
+ hole.addEventListener("pointerdown",event=>{
+  if(event.button!==undefined&&event.button!==0)return;
+  event.preventDefault();
+  hitHole(index);
+ });
+ hole.addEventListener("click",event=>{
+  if(event.detail===0)hitHole(index);
+ });
 });
+startBtn.addEventListener("click",()=>{if(!playing)startGame()});
+resetBtn.addEventListener("click",resetGame);
 </script>
 </body>
 </html>

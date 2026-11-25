@@ -28,7 +28,7 @@ h1{font-size:clamp(32px,6vw,48px);margin:7px 0}
 .mascot{position:absolute;z-index:2;left:50%;bottom:13%;width:76%;height:90%;transform:translate(-50%,115%);transition:transform .3s cubic-bezier(.2,.8,.2,1);pointer-events:none;display:block}
 .hole.active .mascot{transform:translate(-50%,0)}
 .hole.hit .mascot{transform:translate(-50%,-5%) scale(.94)}
-.mascot svg{display:block;width:100%;height:100%;overflow:visible}
+.mascot img{display:block;width:100%;height:100%;object-fit:contain}
 .dirt{position:absolute;z-index:3;left:10%;right:10%;bottom:7%;height:28%;border-radius:50%;background:radial-gradient(ellipse at 50% 35%,#3e2d23 0 48%,#684a35 52% 70%,#98704c 73%);box-shadow:0 5px 0 #b28a60;pointer-events:none}
 .grass{position:absolute;z-index:4;left:0;right:0;bottom:0;height:25%;background:linear-gradient(#91ad78,#77945f);clip-path:polygon(0 32%,12% 20%,23% 36%,34% 15%,47% 35%,58% 17%,71% 34%,84% 14%,100% 31%,100% 100%,0 100%);pointer-events:none}
 .spark{position:absolute;z-index:5;top:8%;left:50%;transform:translateX(-50%);font-size:24px;opacity:0;pointer-events:none}
@@ -65,7 +65,7 @@ footer{text-align:center;color:#a2a498;font-size:11px;margin-top:20px}
 <script>
 "use strict";
 const board=document.getElementById("board");
-const bearMarkup = `<span class="mascot" aria-hidden="true"><svg viewBox="0 0 120 130" role="img"><ellipse cx="60" cy="112" rx="42" ry="12" fill="#d9d9d3"/><path d="M22 42 Q10 12 34 18 Q45 20 47 34 Q60 27 73 34 Q77 18 91 18 Q112 16 99 46 Q110 60 105 88 Q100 117 60 117 Q20 117 15 88 Q10 60 22 42Z" fill="#fff" stroke="#d8d8d4" stroke-width="2"/><ellipse cx="34" cy="28" rx="10" ry="12" fill="#fff" stroke="#d8d8d4" stroke-width="2"/><ellipse cx="86" cy="28" rx="10" ry="12" fill="#fff" stroke="#d8d8d4" stroke-width="2"/><ellipse cx="42" cy="65" rx="3.5" ry="4.5" fill="#34342f"/><ellipse cx="78" cy="65" rx="3.5" ry="4.5" fill="#34342f"/><ellipse cx="60" cy="78" rx="7" ry="5" fill="#34342f"/><path d="M54 86 Q60 92 66 86" fill="none" stroke="#34342f" stroke-width="2" stroke-linecap="round"/><ellipse cx="29" cy="80" rx="8" ry="4" fill="#f3b9b4" opacity=".65"/><ellipse cx="91" cy="80" rx="8" ry="4" fill="#f3b9b4" opacity=".65"/></svg></span><span class="dirt" aria-hidden="true"></span><span class="grass" aria-hidden="true"></span><span class="spark" aria-hidden="true">✨</span>`;
+const bearMarkup = `<span class="mascot" aria-hidden="true"><img src="assets/damgom.png" alt=""></span><span class="dirt" aria-hidden="true"></span><span class="grass" aria-hidden="true"></span><span class="spark" aria-hidden="true">✨</span>`;
 board.innerHTML = Array.from({length:9},(_,i)=>`<button class="hole" type="button" aria-label="${i+1}번 구멍">${bearMarkup}</button>`).join("");
 const holes=[...board.querySelectorAll(".hole")];
 const scoreEl=document.getElementById("score");
